@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth scroll-pt-24">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parth Dani — Software & AI Engineer</title>
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="Portfolio of Parth Dani — B.Tech Computer Engineering student at DDU. Building scalable backends with MERN, Spring Boot, .NET, and practical AI integrations.">
+    <meta name="keywords" content="Parth Dani, Software Engineer, AI Engineer, Full Stack Developer, MERN, Spring Boot, ASP.NET Core, DDU Nadiad, C++, Java, Portfolio">
+    <meta name="author" content="Parth Dani">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Parth Dani — Software & AI Engineer">
+    <meta property="og:description" content="B.Tech Computer Engineering student at DDU. Scalable Backends across MERN, Spring Boot, .NET & Practical AI.">
+    <meta property="og:image" content="https://res.cloudinary.com/demo/image/upload/v1631234567/sample.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Parth Dani — Software & AI Engineer">
+    <meta name="twitter:description" content="B.Tech Computer Engineering student at DDU. Scalable Backends across MERN, Spring Boot, .NET & Practical AI.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#050807',
+                        cardBg: '#0b120e',
+                        cardHover: '#111a14',
+                        cyanAccent: '#00e5bf',
+                        cyanGlow: 'rgba(0, 229, 191, 0.4)',
+                        cyanDim: '#00b396',
+                        textMuted: '#94a3b8',
+                        textLight: '#cbd5e1',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.4, transform: 'scale(1)' },
+                            '50%': { opacity: 0.8, transform: 'scale(1.05)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #050807;
+            color: #f1f5f9;
+            font-family: 'Outfit', 'Inter', sans-serif;
+            cursor: default;
+            overflow-x: hidden;
+        }
+
+        /* 3D Particle Canvas Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        /* Custom Cyan Glowing Cursor */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.25s ease-out, transform 0.08s ease-out, width 0.2s, height 0.2s, border-color 0.2s, background-color 0.2s;
+            z-index: 9999;
+        }
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00e5bf;
+            box-shadow: 0 0 12px #00e5bf, 0 0 20px #00e5bf;
+            transform: translate(-50%, -50%);
+        }
+        #cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(0, 229, 191, 0.5);
+            transform: translate(-50%, -50%);
+        }
+
+        /* Glassmorphism Panel */
+        .glass-panel {
+            background: rgba(11, 18, 14, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 229, 191, 0.12);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-panel:hover {
+            border-color: rgba(0, 229, 191, 0.35);
+            box-shadow: 0 10px 30px -10px rgba(0, 229, 191, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .glass-panel-glow {
+            background: linear-gradient(135deg, rgba(0, 229, 191, 0.05) 0%, rgba(11, 18, 14, 0.8) 100%);
+            border: 1px solid rgba(0, 229, 191, 0.25);
+            box-shadow: 0 0 25px rgba(0, 229, 191, 0.08);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050807;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #13241b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00e5bf;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 20%, #00e5bf 70%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active,
+        header .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Marquee Ticker */
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-ticker {
+            display: flex;
+            width: max-content;
+            animation: ticker 28s linear infinite;
+        }
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        /* Outline Typography Watermark */
+        .outline-watermark {
+            font-size: clamp(4rem, 13vw, 16rem);
+            font-weight: 900;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.16);
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+            user-select: none;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .outline-watermark:hover {
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.38);
+            color: rgba(0, 229, 191, 0.03);
+            letter-spacing: -0.01em;
+        }
+
+        /* Terminal Blinking Cursor */
+        @keyframes blinkCursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .animate-blink {
+            animation: blinkCursor 1s step-start infinite;
+        }
+
+        /* Glowing Badge */
+        .badge-glow {
+            box-shadow: 0 0 15px rgba(0, 229, 191, 0.2);
+        }
+
+        /* Preloader Styles */
+        html.loading, body.loading {
+            overflow: hidden !important;
+            height: 100vh !important;
+        }
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background-color: #050807;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+            user-select: none;
+        }
+        #preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="selection:bg-cyanAccent selection:text-black relative loading">
+
+    <!-- Cyber Preloader Screen -->
+    <div id="preloader">
+        <!-- Glowing Radial Background & Grid -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,229,191,0.12)_0%,_transparent_70%)] pointer-events-none"></div>
+        <div class="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#00e5bf_1px,transparent_1px),linear-gradient(to_bottom,#00e5bf_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col items-center max-w-sm px-6 text-center">
+            <!-- Cyber Brand Logo -->
+            <div class="text-xl md:text-2xl font-extrabold tracking-wider font-mono text-white flex items-center space-x-2 mb-8">
+                <span class="w-3.5 h-3.5 rounded-full bg-cyanAccent animate-pulse shadow-[0_0_12px_#00e5bf]"></span>
+                <span>PARTH.DANI<span class="text-cyanAccent animate-blink inline-block">_</span></span>
+            </div>
+
+            <!-- Percentage Counter -->
+            <div class="relative mb-6">
+                <div id="loader-pct" class="text-6xl md:text-7xl font-extrabold font-mono tracking-tighter gradient-text drop-shadow-[0_0_25px_rgba(0,229,191,0.4)]">
+                    0%
+                </div>
+            </div>
+
+            <!-- Progress Bar Track -->
+            <div class="w-64 md:w-80 h-2 bg-white/10 rounded-full overflow-hidden border border-cyanAccent/30 p-0.5 mb-4 shadow-[0_0_15px_rgba(0,229,191,0.15)] relative">
+                <div id="loader-bar" class="h-full w-0 bg-gradient-to-r from-cyanAccent via-teal-400 to-sky-400 rounded-full transition-all duration-75 ease-out shadow-[0_0_12px_#00e5bf]"></div>
+            </div>
+
+            <!-- Status Ticker Text -->
+            <div class="flex items-center space-x-2 font-mono text-xs text-textMuted h-6">
+                <span class="text-cyanAccent animate-pulse">></span>
+                <span id="loader-status" class="tracking-wide">Initializing Cyberspace Core...</span>
+            </div>
+        </div>
+
+        <!-- Footer Watermark in Loader -->
+        <div class="absolute bottom-8 font-mono text-[10px] text-white/30 tracking-widest uppercase">
+            PARTH DANI SYSTEM v2.5 — ALL SYSTEMS NOMINAL
+        </div>
+    </div>
+
+    <!-- 3D Particle Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div id="cursor-dot" class="custom-cursor hidden md:block"></div>
+    <div id="cursor-ring" class="custom-cursor hidden md:block"></div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[100] flex flex-col space-y-3 pointer-events-none"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-darkBg/80 backdrop-blur-xl border-b border-white/5 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-lg font-extrabold tracking-wider font-mono text-white flex items-center space-x-2">
+                <span class="w-3 h-3 rounded-full bg-cyanAccent animate-pulse"></span>
+                <span>PARTH.DANI<span class="text-cyanAccent animate-blink inline-block">_</span></span>
+            </a>
+            
+            <div class="hidden lg:flex items-center space-x-8 text-xs font-mono tracking-widest text-textMuted">
+                <a href="#about" class="hover:text-cyanAccent transition-colors">01. ABOUT</a>
+                <a href="#skills" class="hover:text-cyanAccent transition-colors">02. SKILLS</a>
+                <a href="#projects" class="hover:text-cyanAccent transition-colors">03. PROJECTS</a>
+                <a href="#journey" class="hover:text-cyanAccent transition-colors">04. JOURNEY</a>
+                <a href="#contact" class="hover:text-cyanAccent transition-colors">05. CONTACT</a>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-4">
+                <!-- Sound Effects Toggle -->
+                <button id="sfx-toggle" onclick="toggleAudioSFX()" title="Toggle Sound FX" class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 hover:border-cyanAccent/40 flex items-center justify-center text-textMuted hover:text-cyanAccent transition-all">
+                    <i class="fa-solid fa-volume-xmark text-xs" id="sfx-icon"></i>
+                </button>
+
+                <span class="px-3.5 py-1.5 rounded-full bg-cyanAccent/10 border border-cyanAccent/30 text-cyanAccent text-xs font-mono flex items-center space-x-2 badge-glow">
+                    <span class="w-2 h-2 rounded-full bg-cyanAccent animate-ping"></span>
+                    <span>OPEN FOR SDE / FULL-STACK ROLES</span>
+                </span>
+
+                <a href="#terminal-section" class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:border-cyanAccent/40 text-xs font-mono text-white transition-all flex items-center space-x-2">
+                    <span class="text-cyanAccent">></span> <span>Terminal</span>
+                </a>
+            </div>
+
+            <button class="lg:hidden text-white focus:outline-none p-2" id="menu-btn" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div class="hidden lg:hidden px-6 pb-6 pt-2 bg-darkBg/95 backdrop-blur-2xl border-b border-white/10 space-y-4 font-mono text-xs" id="mobile-menu">
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-textMuted hover:text-cyanAccent py-1">01. ABOUT</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="block text-textMuted hover:text-cyanAccent py-1">02. SKILLS</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block text-textMuted hover:text-cyanAccent py-1">03. PROJECTS</a>
+            <a href="#journey" onclick="toggleMobileMenu()" class="block text-textMuted hover:text-cyanAccent py-1">04. JOURNEY</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-textMuted hover:text-cyanAccent py-1">05. CONTACT</a>
+            <div class="pt-3 border-t border-white/5 flex flex-col space-y-3">
+                <button onclick="openResumeModal(); toggleMobileMenu();" class="w-full py-2.5 rounded-lg bg-cyanAccent/10 border border-cyanAccent/40 text-cyanAccent text-center font-mono text-xs flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>View Resume</span>
+                </button>
+                <div class="flex items-center justify-between text-[11px]">
+                    <span class="text-cyanAccent">● OPEN FOR SDE ROLES</span>
+                    <button onclick="toggleAudioSFX()" class="text-textMuted hover:text-cyanAccent text-xs">
+                        <i class="fa-solid fa-volume-xmark mr-1" id="sfx-icon-mobile"></i> SFX
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-6 overflow-hidden z-10">
+        <!-- Glow Orbs -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyanAccent/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" style="animation-delay: 1.5s;"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Hero Text -->
+            <div class="lg:col-span-7 space-y-6 reveal">
+                <div class="inline-flex items-center space-x-3 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-cyanAccent font-mono text-xs tracking-widest uppercase">
+                    <i class="fa-solid fa-terminal text-[10px]"></i>
+                    <span>Full-Stack Developer — Parth Dani</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight uppercase leading-[1.05]">
+                    Full-Stack <br>
+                    <span class="gradient-text">Software Developer.</span>
+                </h1>
+                
+                <p class="text-textMuted text-base sm:text-lg max-w-2xl leading-relaxed font-light space-y-3">
+                    <span>
+                        B.Tech Computer Engineering student at <span class="text-white font-medium">Dharmsinh Desai University (DDU)</span> with a passion for building robust, high-performance web applications and scalable backend systems.
+                    </span>
+                    <span class="block text-white/80">
+                        Specializing in full-stack web development across <span class="text-cyanAccent font-mono">MERN (MongoDB, Express, React, Node.js)</span>, <span class="text-cyanAccent font-mono">Java Spring Boot</span>, and <span class="text-cyanAccent font-mono">Python Django</span> — blending algorithmic precision in <span class="text-cyanAccent font-mono">C/C++ DSA</span> to build robust, end-to-end production software.
+                    </span>
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+                    <a href="#projects" class="px-8 py-4 rounded-xl bg-cyanAccent text-slate-950 font-bold text-xs tracking-widest uppercase hover:bg-cyanDim transition-all text-center flex items-center justify-center space-x-2 shadow-lg shadow-cyanAccent/20 hover:shadow-cyanAccent/40">
+                        <span>Explore Flagship Work</span>
+                        <i class="fa-solid fa-arrow-down text-xs"></i>
+                    </a>
+                    <button onclick="openResumeModal()" class="px-8 py-4 rounded-xl bg-cyanAccent/10 border border-cyanAccent/40 text-cyanAccent font-bold text-xs tracking-widest uppercase hover:bg-cyanAccent hover:text-slate-950 transition-all text-center flex items-center justify-center space-x-2 shadow-lg shadow-cyanAccent/10">
+                        <i class="fa-solid fa-file-pdf text-xs"></i>
+                        <span>View Resume</span>
+                    </button>
+                    <a href="#terminal-section" class="px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-medium text-xs tracking-widest uppercase hover:border-cyanAccent/40 transition-all text-center flex items-center justify-center space-x-2">
+                        <span class="text-cyanAccent">></span>
+                        <span>Launch Terminal</span>
+                    </a>
+                    <div class="flex items-center justify-center space-x-3 px-2">
+                        <a href="https://github.com/ParthDani17" target="_blank" rel="noopener noreferrer" title="GitHub Profile" class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center text-textMuted hover:text-cyanAccent hover:border-cyanAccent/40 border border-white/10 transition-all"><i class="fa-brands fa-github text-base"></i></a>
+                        <a href="https://www.linkedin.com/in/parth-dani17/" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile" class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center text-textMuted hover:text-cyanAccent hover:border-cyanAccent/40 border border-white/10 transition-all"><i class="fa-brands fa-linkedin-in text-base"></i></a>
+                        <a href="https://leetcode.com/u/ParthDani/" target="_blank" rel="noopener noreferrer" title="LeetCode Profile" class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center text-textMuted hover:text-cyanAccent hover:border-cyanAccent/40 border border-white/10 transition-all">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662l-4.332-4.363c-.467-.467-.702-1.15-.702-1.863 0-.713.235-1.357.702-1.824l4.319-4.38c.467-.467 1.125-.645 1.837-.645s1.357.195 1.823.662l2.697 2.606c.514.515 1.365.515 1.879 0 .515-.515.515-1.365 0-1.879l-2.697-2.607c-1.001-1.002-2.335-1.503-3.702-1.503s-2.701.501-3.702 1.503l-4.32 4.38c-1.002 1.002-1.503 2.336-1.503 3.703 0 1.367.501 2.701 1.503 3.703l4.333 4.363c1.001 1.001 2.335 1.502 3.702 1.502s2.701-.501 3.702-1.502l2.697-2.607c.515-.514.515-1.364 0-1.878-.514-.515-1.364-.515-1.879 0z"/></svg>
+                        </a>
+                        <button onclick="copyToClipboard('parthdani17@gmail.com', 'Email address copied!')" title="Copy Email" class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center text-textMuted hover:text-cyanAccent hover:border-cyanAccent/40 border border-white/10 transition-all"><i class="fa-solid fa-envelope text-base"></i></button>
+                    </div>
+                </div>
+
+                <!-- Quick Tech Pills -->
+                <div class="flex flex-wrap items-center gap-3 pt-6 text-xs font-mono text-textMuted">
+                    <span class="text-white/40 font-sans text-xs">Full-Stack Stack:</span>
+                    <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-cyanAccent">MERN Stack</span>
+                    <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-cyanAccent">Java Spring Boot</span>
+                    <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-cyanAccent">Python Django</span>
+                    <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-cyanAccent">C/C++ DSA</span>
+                    <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-cyanAccent">MongoDB & PostgreSQL</span>
+                </div>
+            </div>
+
+            <!-- Right Interactive Terminal Widget -->
+            <div class="lg:col-span-5 reveal" id="terminal-section">
+                <div class="glass-panel glass-panel-glow rounded-2xl overflow-hidden shadow-2xl border border-cyanAccent/30">
+                    <div class="bg-cardBg/90 px-4 py-3 flex items-center justify-between border-b border-white/10 font-mono text-xs text-textMuted">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block cursor-pointer" onclick="runCommand('clear')"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                        </div>
+                        <span class="text-white font-medium">parth@ddu-node — zsh</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded bg-cyanAccent/10 text-cyanAccent border border-cyanAccent/20">v2.6 interactive</span>
+                    </div>
+
+                    <div class="p-5 font-mono text-xs space-y-3.5 terminal-body h-80 overflow-y-auto" id="terminal-screen" onclick="document.getElementById('terminal-input').focus()">
+                        <div class="text-textMuted leading-relaxed">
+                            Welcome to Parth's interactive console. Type <span class="text-cyanAccent font-bold">help</span> or click quick actions below.
+                        </div>
+                        <div class="space-y-3" id="terminal-history">
+                            <div>
+                                <span class="text-cyanAccent">➜ ~</span> whoami
+                                <div class="mt-1.5 space-y-1 font-mono text-xs">
+                                    <div><span class="text-textMuted inline-block w-20">name:</span> <span class="text-white font-bold">Parth Dani</span></div>
+                                    <div><span class="text-textMuted inline-block w-20">degree:</span> <span class="text-white">B.Tech Computer Engineering</span></div>
+                                    <div><span class="text-textMuted inline-block w-20">univ:</span> <span class="text-cyanAccent font-bold">Dharmsinh Desai University (DDU)</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="text-cyanAccent">➜ ~</span> skills
+                                <div class="mt-1.5 space-y-1 font-mono text-xs">
+                                    <div><span class="text-textMuted inline-block w-20">langs:</span> <span class="text-white">C/C++ · Java · Python · JavaScript · TypeScript · PHP</span></div>
+                                    <div><span class="text-textMuted inline-block w-20">frontend:</span> <span class="text-white">React · React Native · TailwindCSS · Bootstrap</span></div>
+                                    <div><span class="text-textMuted inline-block w-20">backend:</span> <span class="text-white">Node/Express · Spring Boot · Django · Hibernate</span></div>
+                                    <div><span class="text-textMuted inline-block w-20">data:</span> <span class="text-white">MongoDB · PostgreSQL · MySQL · SQLite · Firebase</span></div>
+                                    <div><span class="text-textMuted inline-block w-20">tools:</span> <span class="text-white">Git · Postman · JWT · Cloudinary</span></div>
+                                    <div><span class="text-textMuted inline-block w-20">exploring:</span> <span class="text-amber-400">Docker · Redis (Containerization & In-Memory Caching)</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg/95 px-4 py-3 border-t border-white/10 flex items-center space-x-2 font-mono text-xs">
+                        <span class="text-cyanAccent font-bold">➜ ~</span>
+                        <input type="text" id="terminal-input" placeholder="Type 'skills', 'projects', 'contact', 'help'..." class="bg-transparent text-white focus:outline-none w-full font-mono text-xs placeholder:text-white/30">
+                    </div>
+
+                    <!-- Quick Command Buttons -->
+                    <div class="bg-darkBg px-4 py-2.5 border-t border-white/5 flex flex-wrap gap-2 text-[10px] font-mono">
+                        <button onclick="runCommand('whoami')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-cyanAccent hover:bg-cyanAccent/10 transition-colors border border-white/5">whoami</button>
+                        <button onclick="runCommand('skills')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-cyanAccent hover:bg-cyanAccent/10 transition-colors border border-white/5">skills</button>
+                        <button onclick="runCommand('projects')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-cyanAccent hover:bg-cyanAccent/10 transition-colors border border-white/5">projects</button>
+                        <button onclick="runCommand('contact')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-cyanAccent hover:bg-cyanAccent/10 transition-colors border border-white/5">contact</button>
+                        <button onclick="runCommand('leetcode')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-cyanAccent hover:bg-cyanAccent/10 transition-colors border border-white/5">leetcode</button>
+                        <button onclick="runCommand('clear')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-cyanAccent hover:bg-cyanAccent/10 transition-colors border border-white/5">clear</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Stats Bar -->
+    <section class="border-y border-white/10 bg-cardBg/60 py-12 relative z-10 backdrop-blur-md reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="space-y-1.5 p-4 rounded-xl hover:bg-white/5 transition-colors">
+                    <div class="text-3xl sm:text-5xl font-extrabold font-mono text-white">08<span class="text-cyanAccent">+</span></div>
+                    <div class="text-xs font-mono text-textMuted uppercase tracking-widest">LANGUAGES & TECH</div>
+                </div>
+                <div class="space-y-1.5 p-4 rounded-xl hover:bg-white/5 transition-colors">
+                    <div class="text-3xl sm:text-5xl font-extrabold font-mono text-white">05</div>
+                    <div class="text-xs font-mono text-textMuted uppercase tracking-widest">DATABASE ENGINES</div>
+                </div>
+                <div class="space-y-1.5 p-4 rounded-xl hover:bg-white/5 transition-colors">
+                    <div class="text-3xl sm:text-5xl font-extrabold font-mono text-white">04</div>
+                    <div class="text-xs font-mono text-textMuted uppercase tracking-widest">BACKEND FRAMEWORKS</div>
+                </div>
+                <div class="space-y-1.5 p-4 rounded-xl hover:bg-white/5 transition-colors">
+                    <div class="text-3xl sm:text-5xl font-extrabold font-mono text-white">01</div>
+                    <div class="text-xs font-mono text-cyanAccent uppercase tracking-widest">FLAGSHIP PLATFORM</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ticker Bar -->
+    <div class="py-5 bg-darkBg border-b border-white/5 overflow-hidden whitespace-nowrap relative z-10">
+        <div class="animate-ticker flex space-x-12 text-xs font-mono text-textMuted uppercase tracking-widest items-center">
+            <span>◆ SPRING BOOT</span>
+            <span class="text-cyanAccent font-bold">◆ ALGORITHMIC PRECISION</span>
+            <span>◆ DISTRIBUTED CACHING</span>
+            <span class="text-cyanAccent font-bold">◆ SCALABLE MERN BACKENDS</span>
+            <span>◆ DJANGO & REACT</span>
+            <span class="text-cyanAccent font-bold">◆ FULL-STACK WEB APPS</span>
+            <span>◆ SPRING BOOT</span>
+            <span class="text-cyanAccent font-bold">◆ ALGORITHMIC PRECISION</span>
+            <span>◆ DISTRIBUTED CACHING</span>
+            <span class="text-cyanAccent font-bold">◆ SCALABLE MERN BACKENDS</span>
+            <span>◆ DJANGO & REACT</span>
+            <span class="text-cyanAccent font-bold">◆ FULL-STACK WEB APPS</span>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-28 relative z-10">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center space-x-4 mb-12 reveal">
+                <span class="font-mono text-xs text-cyanAccent uppercase tracking-widest">// ABOUT.ME — MANIFESTO</span>
+                <div class="h-[1px] bg-white/10 flex-grow"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 reveal gap-4">
+                <div>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold uppercase text-white tracking-tight">The Core Manifesto</h2>
+                    <p class="text-textMuted text-sm sm:text-base max-w-xl mt-2 font-light">
+                        Building software with a database-first mindset, clean architecture layers, and mathematical problem-solving.
+                    </p>
+                </div>
+                <div class="font-mono text-xs text-textMuted bg-white/5 px-4 py-2 rounded-lg border border-white/10">
+                    STATUS: <span class="text-cyanAccent">ENGINEERING @ DDU</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left Scrolling Code Preview Panel -->
+                <div class="lg:col-span-5 glass-panel p-6 rounded-2xl font-mono text-xs text-textMuted space-y-2.5 reveal lg:sticky lg:top-28">
+                    <div class="flex items-center justify-between pb-3 border-b border-white/10 text-[10px]">
+                        <span class="text-cyanAccent flex items-center space-x-2">
+                            <i class="fa-solid fa-code text-xs"></i>
+                            <span>parth_dani_core.rs</span>
+                        </span>
+                        <span class="px-2 py-0.5 rounded bg-white/5 text-white/60">Rust Spec</span>
+                    </div>
+                    <p class="text-cyanAccent pt-1">// System Architecture Profile</p>
+                    <p><span class="text-purple-400">struct</span> <span class="text-yellow-300">Engineer</span> {</p>
+                    <p class="pl-4">name: <span class="text-teal-300">"Parth Dani"</span>,</p>
+                    <p class="pl-4">university: <span class="text-teal-300">"DDU Nadiad"</span>,</p>
+                    <p class="pl-4">degree: <span class="text-teal-300">"B.Tech Computer Engineering"</span>,</p>
+                    <p class="pl-4">focus: <span class="text-teal-300">"Full-Stack Web Engineering"</span>,</p>
+                    <p class="pl-4">dsa_mastery: <span class="text-purple-400">true</span>,</p>
+                    <p class="pl-4">primary_languages: [<span class="text-teal-300">"C/C++"</span>, <span class="text-teal-300">"Java"</span>, <span class="text-teal-300">"JS"</span>, <span class="text-teal-300">"Python"</span>],</p>
+                    <p class="pl-4">databases: [<span class="text-teal-300">"MongoDB"</span>, <span class="text-teal-300">"MySQL"</span>, <span class="text-teal-300">"PostgreSQL"</span>],</p>
+                    <p class="pl-4">architectures: [<span class="text-teal-300">"MVC"</span>, <span class="text-teal-300">"Layered Services"</span>, <span class="text-teal-300">"REST APIs"</span>]</p>
+                    <p>}</p>
+                    <div class="pt-3 border-t border-white/5 text-cyanAccent">
+                        // "Software is built from the database schema up."
+                    </div>
+                </div>
+
+                <!-- Right Manifestos Cards -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="glass-panel p-8 rounded-2xl space-y-4 reveal">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-cyanAccent font-mono font-extrabold text-2xl">01</span>
+                            <h3 class="text-lg font-bold uppercase tracking-wider text-white">THE COMPUTER ENGINEERING FOUNDATION</h3>
+                        </div>
+                        <p class="text-textMuted text-sm sm:text-base leading-relaxed font-light">
+                            Studying B.Tech Computer Engineering at <span class="text-white font-medium">Dharmsinh Desai University</span>. Grounded in core Computer Science principles that drive high-performance software: Data Structures & Algorithms, Object-Oriented Design, DBMS, Design & Analysis of Algorithms, Operating Systems, and Computer Networks.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono">
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted border border-white/5">C/C++</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted border border-white/5">JAVA</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted border border-white/5">PYTHON</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted border border-white/5">DSA</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted border border-white/5">OOP</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted border border-white/5">DBMS</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-2xl space-y-4 reveal">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-cyanAccent font-mono font-extrabold text-2xl">02</span>
+                            <h3 class="text-lg font-bold uppercase tracking-wider text-white">ARCHITECTURE, FRAMEWORKS & SCALE</h3>
+                        </div>
+                        <p class="text-textMuted text-sm sm:text-base leading-relaxed font-light">
+                            Production MERN stack experience featuring strict <span class="text-cyanAccent font-mono">Controller–Route–Model–Middleware</span> modular pattern, JWT authentication, bcrypt password hashing, Multer & Cloudinary media integration, and validation. Expanding into enterprise backends: Spring Boot (IoC, Spring Security, Hibernate/JPA), ASP.NET Core MVC (EF Core, Repository Pattern), Docker, and Redis caching.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono">
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">MERN</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">SPRING BOOT</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">ASP.NET CORE</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">DOCKER</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">REDIS</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-2xl space-y-4 reveal">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-cyanAccent font-mono font-extrabold text-2xl">03</span>
+                            <h3 class="text-lg font-bold uppercase tracking-wider text-white">FULL-STACK WEB & REST API INTEGRATION</h3>
+                        </div>
+                        <p class="text-textMuted text-sm sm:text-base leading-relaxed font-light">
+                            Designing clean full-stack web applications connecting modern user interfaces (React, TailwindCSS) with robust REST APIs. Engineering secure end-to-end user flows, role-based authorization, request validation, and smooth data synchronization between client and server.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono">
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">FULL-STACK WEB</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">REST APIS</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">ROLE AUTH</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">REACT UI</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-2xl space-y-4 reveal">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-cyanAccent font-mono font-extrabold text-2xl">04</span>
+                            <h3 class="text-lg font-bold uppercase tracking-wider text-white">DATABASE SCHEMA DESIGN & OPTIMIZATION</h3>
+                        </div>
+                        <p class="text-textMuted text-sm sm:text-base leading-relaxed font-light">
+                            Believing that application performance starts at the data layer. Designing robust relational models (PostgreSQL, MySQL) and NoSQL document schemas (MongoDB). Implementing indexing strategies, aggregation pipelines, ACID transaction boundaries, and query optimizations.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono">
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted border border-white/5">POSTGRESQL</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted border border-white/5">MONGODB</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted border border-white/5">MYSQL</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted border border-white/5">INDEXING</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted border border-white/5">AGGREGATION</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-2xl space-y-4 reveal">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-cyanAccent font-mono font-extrabold text-2xl">05</span>
+                            <h3 class="text-lg font-bold uppercase tracking-wider text-white">HACKATHONS, AGILITY & PROBLEM SOLVING</h3>
+                        </div>
+                        <p class="text-textMuted text-sm sm:text-base leading-relaxed font-light">
+                            Thriving under pressure in team hackathons and engineering sprints. Turning complex requirements into functional, scalable software prototypes with high velocity, clean git branching workflows, and algorithmic discipline.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono">
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">HACKATHONS</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">RAPID PROTOTYPING</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">ALGORITHMIC LOGIC</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-cyanAccent border border-cyanAccent/20">GIT WORKFLOWS</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Matrix Section -->
+    <section id="skills" class="py-28 bg-cardBg/40 border-y border-white/10 relative z-10 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center space-x-4 mb-12 reveal">
+                <span class="font-mono text-xs text-cyanAccent uppercase tracking-widest">// SKILLS.MATRIX — INSPECTED</span>
+                <div class="h-[1px] bg-white/10 flex-grow"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 reveal gap-6">
+                <div>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold uppercase text-white tracking-tight">Technical Proficiency</h2>
+                    <p class="text-textMuted text-sm sm:text-base max-w-xl mt-2 font-light">
+                        Filter technologies by domain or search directly by keyword.
+                    </p>
+                </div>
+                
+                <!-- Skill Live Search Bar -->
+                <div class="w-full md:w-72 relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-textMuted text-xs"></i>
+                    <input type="text" id="skill-search" oninput="searchSkills()" placeholder="Search skill (e.g. Java, React)..." class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-darkBg border border-white/10 text-white text-xs font-mono focus:outline-none focus:border-cyanAccent transition-colors">
+                </div>
+            </div>
+
+            <!-- Filter Categories -->
+            <div class="flex flex-wrap gap-2.5 mb-12 reveal" id="skill-filters">
+                <button onclick="filterSkills('all', event)" class="skill-btn px-4 py-2 rounded-xl border border-cyanAccent text-cyanAccent bg-cyanAccent/10 text-xs font-mono uppercase tracking-wider transition-all">ALL</button>
+                <button onclick="filterSkills('languages', event)" class="skill-btn px-4 py-2 rounded-xl border border-white/10 text-textMuted hover:border-cyanAccent hover:text-white text-xs font-mono uppercase tracking-wider transition-all">LANGUAGES</button>
+                <button onclick="filterSkills('frontend', event)" class="skill-btn px-4 py-2 rounded-xl border border-white/10 text-textMuted hover:border-cyanAccent hover:text-white text-xs font-mono uppercase tracking-wider transition-all">FRONTEND</button>
+                <button onclick="filterSkills('backend', event)" class="skill-btn px-4 py-2 rounded-xl border border-white/10 text-textMuted hover:border-cyanAccent hover:text-white text-xs font-mono uppercase tracking-wider transition-all">BACKEND</button>
+                <button onclick="filterSkills('data', event)" class="skill-btn px-4 py-2 rounded-xl border border-white/10 text-textMuted hover:border-cyanAccent hover:text-white text-xs font-mono uppercase tracking-wider transition-all">DATABASES</button>
+                <button onclick="filterSkills('tools', event)" class="skill-btn px-4 py-2 rounded-xl border border-white/10 text-textMuted hover:border-cyanAccent hover:text-white text-xs font-mono uppercase tracking-wider transition-all">TOOLS</button>
+                <button onclick="filterSkills('exploring', event)" class="skill-btn px-4 py-2 rounded-xl border border-white/10 text-textMuted hover:border-amber-400 hover:text-amber-400 text-xs font-mono uppercase tracking-wider transition-all">EXPLORING</button>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="skills-grid">
+                
+                <!-- 1. C/C++ (Primary Language & Core CS) -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal" data-category="languages core" data-name="c c++ dsa algorithmic" data-target="92">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-solid fa-code text-cyanAccent text-xs"></i>
+                            <span>C / C++</span>
+                        </span>
+                        <span class="skill-pct text-cyanAccent font-mono text-xs font-bold">0%</span>
+                    </div>
+                    <div class="text-textMuted text-xs font-mono">DSA & COMPETITIVE PROGRAMMING</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-cyanAccent to-emerald-400 h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- 2. Java (Primary Language & Spring Boot) -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal" data-category="languages backend" data-name="java spring boot ioc di" data-target="85">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-brands fa-java text-cyanAccent text-xs"></i>
+                            <span>Java</span>
+                        </span>
+                        <span class="skill-pct text-cyanAccent font-mono text-xs font-bold">0%</span>
+                    </div>
+                    <div class="text-textMuted text-xs font-mono">SPRING BOOT & ENTERPRISE OOP</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-cyanAccent to-emerald-400 h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- 3. Python (Primary Language & Django) -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal" data-category="languages backend" data-name="python django web backend scripting" data-target="80">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-brands fa-python text-cyanAccent text-xs"></i>
+                            <span>Python</span>
+                        </span>
+                        <span class="skill-pct text-cyanAccent font-mono text-xs font-bold">0%</span>
+                    </div>
+                    <div class="text-textMuted text-xs font-mono">DJANGO & WEB BACKEND</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-cyanAccent to-emerald-400 h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- 4. JavaScript / TypeScript -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal" data-category="languages frontend backend" data-name="javascript js typescript ts node express react mern" data-target="88">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-brands fa-js text-cyanAccent text-xs"></i>
+                            <span>JavaScript / TypeScript</span>
+                        </span>
+                        <span class="skill-pct text-cyanAccent font-mono text-xs font-bold">0%</span>
+                    </div>
+                    <div class="text-textMuted text-xs font-mono">MERN STACK CORE & ASYNC JS</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-cyanAccent to-emerald-400 h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- 5. PHP -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal" data-category="languages backend" data-name="php backend web" data-target="65">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-brands fa-php text-cyanAccent text-xs"></i>
+                            <span>PHP</span>
+                        </span>
+                        <span class="skill-pct text-cyanAccent font-mono text-xs font-bold">0%</span>
+                    </div>
+                    <div class="text-textMuted text-xs font-mono">BACKEND SCRIPTING</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-cyanAccent to-emerald-400 h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- 6. React.js -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal" data-category="frontend" data-name="react reactjs spa state hooks" data-target="85">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-brands fa-react text-cyanAccent text-xs"></i>
+                            <span>React.js</span>
+                        </span>
+                        <span class="skill-pct text-cyanAccent font-mono text-xs font-bold">0%</span>
+                    </div>
+                    <div class="text-textMuted text-xs font-mono">SPA & HOOKS ARCHITECTURE</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-cyanAccent to-emerald-400 h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- 7. Node.js / Express.js -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal" data-category="backend" data-name="node nodejs express backend api rest" data-target="88">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-brands fa-node-js text-cyanAccent text-xs"></i>
+                            <span>Node.js / Express.js</span>
+                        </span>
+                        <span class="skill-pct text-cyanAccent font-mono text-xs font-bold">0%</span>
+                    </div>
+                    <div class="text-textMuted text-xs font-mono">REST APIS & MVC CONTROLLERS</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-cyanAccent to-emerald-400 h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- 8. MongoDB / Mongoose -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal" data-category="data backend" data-name="mongodb mongoose nosql database" data-target="86">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-solid fa-database text-cyanAccent text-xs"></i>
+                            <span>MongoDB / Mongoose</span>
+                        </span>
+                        <span class="skill-pct text-cyanAccent font-mono text-xs font-bold">0%</span>
+                    </div>
+                    <div class="text-textMuted text-xs font-mono">SCHEMAS, RELATIONS & AGGREGATIONS</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-cyanAccent to-emerald-400 h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- 9. MySQL / PostgreSQL -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal" data-category="data" data-name="mysql postgresql postgres sql relational" data-target="80">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-solid fa-server text-cyanAccent text-xs"></i>
+                            <span>MySQL / PostgreSQL</span>
+                        </span>
+                        <span class="skill-pct text-cyanAccent font-mono text-xs font-bold">0%</span>
+                    </div>
+                    <div class="text-textMuted text-xs font-mono">RELATIONAL SCHEMAS & SQL DBMS</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-cyanAccent to-emerald-400 h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- 10. Git / Postman / JWT -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal" data-category="tools backend" data-name="git github postman jwt security version control" data-target="90">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-brands fa-git-alt text-cyanAccent text-xs"></i>
+                            <span>Git / Postman / JWT</span>
+                        </span>
+                        <span class="skill-pct text-cyanAccent font-mono text-xs font-bold">0%</span>
+                    </div>
+                    <div class="text-textMuted text-xs font-mono">WORKFLOWS & API TESTING</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-cyanAccent to-emerald-400 h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- 11. EXPLORING: Redis -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal border border-amber-500/30" data-category="exploring" data-name="redis cache caching in-memory exploring" data-target="55">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-solid fa-bolt text-amber-400 text-xs"></i>
+                            <span>Redis</span>
+                        </span>
+                        <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30 font-mono text-[10px] font-bold">EXPLORING</span>
+                    </div>
+                    <div class="text-amber-400/90 text-xs font-mono font-medium">EXPLORING: IN-MEMORY CACHING</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-amber-400 to-cyanAccent h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- 12. EXPLORING: Docker -->
+                <div class="skill-card glass-panel p-6 rounded-2xl space-y-4 reveal border border-amber-500/30" data-category="exploring" data-name="docker container containerization devops exploring" data-target="50">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-bold text-sm flex items-center space-x-2">
+                            <i class="fa-brands fa-docker text-amber-400 text-xs"></i>
+                            <span>Docker</span>
+                        </span>
+                        <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30 font-mono text-[10px] font-bold">EXPLORING</span>
+                    </div>
+                    <div class="text-amber-400/90 text-xs font-mono font-medium">EXPLORING: CONTAINERIZATION</div>
+                    <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div class="skill-bar bg-gradient-to-r from-amber-400 to-cyanAccent h-full rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-28 relative z-10">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center space-x-4 mb-12 reveal">
+                <span class="font-mono text-xs text-cyanAccent uppercase tracking-widest">// FEATURED.WORK — PLATFORMS</span>
+                <div class="h-[1px] bg-white/10 flex-grow"></div>
+            </div>
+
+            <!-- SkillBridge Flagship Spotlight -->
+            <div class="glass-panel glass-panel-glow p-8 sm:p-12 rounded-3xl border border-cyanAccent/30 relative overflow-hidden reveal mb-16">
+                <div class="absolute -right-24 -top-24 w-96 h-96 bg-cyanAccent/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-cyanAccent/10 border border-cyanAccent/30 text-cyanAccent text-xs font-mono badge-glow">
+                            <i class="fa-solid fa-star text-[10px]"></i>
+                            <span>FLAGSHIP MERN PLATFORM</span>
+                        </div>
+                        
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">SkillBridge</h3>
+                        
+                        <p class="text-textMuted text-sm sm:text-base leading-relaxed font-light">
+                            A comprehensive peer-to-peer skill learning and mentoring platform connecting students with experienced mentors. Features full authentication workflows, structured mentor profiles, skill cataloging, session booking pipelines, notification delivery, reviews, and document/certificate storage.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono text-textMuted">
+                            <div class="flex items-center space-x-2.5 bg-white/5 p-2.5 rounded-lg border border-white/5">
+                                <i class="fa-solid fa-shield-halved text-cyanAccent"></i>
+                                <span>JWT & Bcrypt Hashing</span>
+                            </div>
+                            <div class="flex items-center space-x-2.5 bg-white/5 p-2.5 rounded-lg border border-white/5">
+                                <i class="fa-solid fa-cloud-arrow-up text-cyanAccent"></i>
+                                <span>Multer + Cloudinary Storage</span>
+                            </div>
+                            <div class="flex items-center space-x-2.5 bg-white/5 p-2.5 rounded-lg border border-white/5">
+                                <i class="fa-solid fa-cubes text-cyanAccent"></i>
+                                <span>Controller–Route–Model Arch</span>
+                            </div>
+                            <div class="flex items-center space-x-2.5 bg-white/5 p-2.5 rounded-lg border border-white/5">
+                                <i class="fa-solid fa-bell text-cyanAccent"></i>
+                                <span>Notifications & Reviews</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono">
+                            <span class="px-3 py-1 rounded-lg bg-white/5 text-cyanAccent border border-cyanAccent/20">Node.js</span>
+                            <span class="px-3 py-1 rounded-lg bg-white/5 text-cyanAccent border border-cyanAccent/20">Express.js</span>
+                            <span class="px-3 py-1 rounded-lg bg-white/5 text-cyanAccent border border-cyanAccent/20">MongoDB</span>
+                            <span class="px-3 py-1 rounded-lg bg-white/5 text-cyanAccent border border-cyanAccent/20">Mongoose</span>
+                            <span class="px-3 py-1 rounded-lg bg-white/5 text-cyanAccent border border-cyanAccent/20">React</span>
+                        </div>
+
+                        <div class="pt-4 flex flex-wrap gap-4 items-center">
+                            <a href="https://github.com/ParthDani17/SkillBridge" target="_blank" rel="noopener noreferrer" class="px-7 py-3.5 rounded-xl bg-cyanAccent text-slate-950 font-bold text-xs uppercase tracking-wider hover:bg-cyanDim transition-all inline-flex items-center space-x-2 shadow-md shadow-cyanAccent/20">
+                                <i class="fa-brands fa-github text-sm"></i>
+                                <span>View GitHub Repository</span>
+                            </a>
+                            <button onclick="openProjectModal('SkillBridge')" class="px-7 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white font-medium text-xs uppercase tracking-wider hover:border-cyanAccent/40 transition-all inline-flex items-center space-x-2">
+                                <i class="fa-solid fa-circle-info text-cyanAccent text-xs"></i>
+                                <span>Architecture Details</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Code Snippet Container -->
+                    <div class="lg:col-span-5 bg-darkBg p-6 rounded-2xl border border-white/10 font-mono text-xs text-textMuted space-y-3 shadow-inner">
+                        <div class="flex items-center justify-between pb-3 border-b border-white/10 text-[10px]">
+                            <span class="text-cyanAccent font-bold flex items-center space-x-2">
+                                <i class="fa-solid fa-file-code"></i>
+                                <span>skillbridge.controller.js</span>
+                            </span>
+                            <span class="text-white/40">REST Controller</span>
+                        </div>
+                        <p class="text-cyanAccent">// Secure session booking handler</p>
+                        <p><span class="text-purple-400">const</span> createSession = <span class="text-purple-400">async</span> (req, res) => {</p>
+                        <p class="pl-4"><span class="text-purple-400">const</span> { mentorId, timeSlot } = req.body;</p>
+                        <p class="pl-4 text-white">await Session.create({</p>
+                        <p class="pl-8">student: req.user.id,</p>
+                        <p class="pl-8">mentor: mentorId,</p>
+                        <p class="pl-8">timeSlot,</p>
+                        <p class="pl-8">status: <span class="text-teal-300">'pending'</span></p>
+                        <p class="pl-4">});</p>
+                        <p class="pl-4">res.status(201).json({ success: <span class="text-purple-400">true</span> });</p>
+                        <p>};</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Project Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Project 02: Event Registration System (Eventify) -->
+                <div class="glass-panel p-8 rounded-3xl space-y-6 reveal flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start">
+                            <span class="font-mono text-xs text-cyanAccent uppercase">JAVA / SPRING BOOT</span>
+                            <span class="px-2.5 py-0.5 rounded bg-white/5 text-[10px] font-mono text-textMuted">Role Auth Backend</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white">Event Registration System</h4>
+                        <p class="text-textMuted text-sm font-light leading-relaxed">
+                            Solo backend REST API for managing event registrations. Built with Spring Boot, Spring Security, Hibernate ORM, and MySQL. Features role-based access control and full Postman collection.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-mono">
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">Spring Boot</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">Spring Security</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">Hibernate</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">MySQL</span>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 flex justify-between items-center">
+                        <button onclick="openProjectModal('Eventify')" class="text-xs font-mono text-cyanAccent hover:underline flex items-center space-x-1">
+                            <span>Read Tech Spec</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                        <a href="https://github.com/ParthDani17/Eventify" target="_blank" rel="noopener noreferrer" title="View GitHub Repo" class="text-textMuted hover:text-cyanAccent transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 03: AI Scholarship Finder -->
+                <div class="glass-panel p-8 rounded-3xl space-y-6 reveal flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start">
+                            <span class="font-mono text-xs text-cyanAccent uppercase">PYTHON / DJANGO / AI</span>
+                            <span class="px-2.5 py-0.5 rounded bg-white/5 text-[10px] font-mono text-textMuted">Hackathon Project</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white">AI Scholarship Finder</h4>
+                        <p class="text-textMuted text-sm font-light leading-relaxed">
+                            Intelligent scholarship discovery platform powered by AI that helps students find personalized scholarship opportunities matching their academic profile, background, and goals.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-mono">
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">Django</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">OpenRouter AI</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">Python</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">TailwindCSS</span>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 flex justify-between items-center">
+                        <button onclick="openProjectModal('AIScholarship')" class="text-xs font-mono text-cyanAccent hover:underline flex items-center space-x-1">
+                            <span>Read Tech Spec</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                        <a href="https://github.com/ParthDani17/AI-Scholarship-Finder" target="_blank" rel="noopener noreferrer" title="View GitHub Repo" class="text-textMuted hover:text-cyanAccent transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 04: News Pulse -->
+                <div class="glass-panel p-8 rounded-3xl space-y-6 reveal flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start">
+                            <span class="font-mono text-xs text-cyanAccent uppercase">PYTHON / DJANGO</span>
+                            <span class="px-2.5 py-0.5 rounded bg-white/5 text-[10px] font-mono text-textMuted">Academic Project</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white">News Pulse</h4>
+                        <p class="text-textMuted text-sm font-light leading-relaxed">
+                            Dynamic news aggregation and curation platform delivering real-time news updates, personalized content streams, and custom category filtering on PostgreSQL.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-mono">
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">Django</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">PostgreSQL</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">JavaScript</span>
+                            <span class="px-2.5 py-1 rounded bg-white/5 text-textMuted">HTML5/CSS3</span>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 flex justify-between items-center">
+                        <button onclick="openProjectModal('NewsPulse')" class="text-xs font-mono text-cyanAccent hover:underline flex items-center space-x-1">
+                            <span>Read Tech Spec</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                        <a href="https://github.com/ParthDani17/News-Pulse" target="_blank" rel="noopener noreferrer" title="View GitHub Repo" class="text-textMuted hover:text-cyanAccent transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section id="journey" class="py-28 bg-cardBg/40 border-y border-white/10 relative z-10 backdrop-blur-md">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="flex items-center space-x-4 mb-12 reveal">
+                <span class="font-mono text-xs text-cyanAccent uppercase tracking-widest">// JOURNEY.LOG — COMMIT HISTORY</span>
+                <div class="h-[1px] bg-white/10 flex-grow"></div>
+            </div>
+
+            <h2 class="text-3xl sm:text-5xl font-extrabold uppercase text-white mb-16 reveal tracking-tight">Timeline & Milestones</h2>
+
+            <!-- Timeline -->
+            <div class="space-y-12 border-l border-white/10 pl-6 sm:pl-10 ml-2 sm:ml-4">
+                
+                <!-- Phase 01 -->
+                <div class="relative reveal space-y-2 group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-darkBg border-2 border-cyanAccent group-hover:bg-cyanAccent transition-all shadow-md shadow-cyanAccent/50"></div>
+                    <div class="text-xs font-mono text-cyanAccent uppercase tracking-widest font-bold">PHASE 01</div>
+                    <h3 class="text-xl font-bold text-white">The Engineering Fundamentals</h3>
+                    <div class="text-xs font-mono text-textMuted">B.Tech Computer Engineering — Dharmsinh Desai University (DDU)</div>
+                    <p class="text-textMuted text-sm leading-relaxed pt-2 font-light">
+                        Grounded in DSA (C/C++), OOP, DBMS, Design & Analysis of Algorithms, Operating Systems, and Computer Networks. Building fundamental CS intuition from memory management to network protocols.
+                    </p>
+                </div>
+
+                <!-- Phase 02 -->
+                <div class="relative reveal space-y-2 group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-darkBg border-2 border-cyanAccent group-hover:bg-cyanAccent transition-all shadow-md shadow-cyanAccent/50"></div>
+                    <div class="text-xs font-mono text-cyanAccent uppercase tracking-widest font-bold">PHASE 02</div>
+                    <h3 class="text-xl font-bold text-white">Full-Stack MERN Architecture</h3>
+                    <div class="text-xs font-mono text-textMuted">Node.js • Express • Mongoose • JWT • Multer • Cloudinary</div>
+                    <p class="text-textMuted text-sm leading-relaxed pt-2 font-light">
+                        Backend engineering with modular structure — Controller-Route-Model-Middleware-Utils. Building REST APIs with full auth, role permissions, file storage, and data validation.
+                    </p>
+                </div>
+
+                <!-- Phase 03 -->
+                <div class="relative reveal space-y-2 group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-darkBg border-2 border-cyanAccent group-hover:bg-cyanAccent transition-all shadow-md shadow-cyanAccent/50"></div>
+                    <div class="text-xs font-mono text-cyanAccent uppercase tracking-widest font-bold">PHASE 03</div>
+                    <h3 class="text-xl font-bold text-white">SkillBridge Platform Ships</h3>
+                    <div class="text-xs font-mono text-textMuted">Flagship Peer Mentoring & Skill Exchange System</div>
+                    <p class="text-textMuted text-sm leading-relaxed pt-2 font-light">
+                        Architected and launched end-to-end: student and mentor workflows, skill catalogs, learning session bookings, notification channels, reviews, and document management on MongoDB.
+                    </p>
+                </div>
+
+                <!-- Phase 04 -->
+                <div class="relative reveal space-y-2 group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-darkBg border-2 border-cyanAccent group-hover:bg-cyanAccent transition-all shadow-md shadow-cyanAccent/50"></div>
+                    <div class="text-xs font-mono text-cyanAccent uppercase tracking-widest font-bold">PHASE 04</div>
+                    <h3 class="text-xl font-bold text-white">Hackathons & Collaborative Builds</h3>
+                    <div class="text-xs font-mono text-textMuted">University Competitions & Team Coding</div>
+                    <p class="text-textMuted text-sm leading-relaxed pt-2 font-light">
+                        Executing under tight time constraints, engineering robust backend services rapidly, and adapting unfamiliar frameworks in high-stakes hackathon settings.
+                    </p>
+                </div>
+
+                <!-- Phase 05 -->
+                <div class="relative reveal space-y-2 group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-darkBg border-2 border-cyanAccent group-hover:bg-cyanAccent transition-all shadow-md shadow-cyanAccent/50"></div>
+                    <div class="text-xs font-mono text-cyanAccent uppercase tracking-widest font-bold">PHASE 05</div>
+                    <h3 class="text-xl font-bold text-white">Java & Enterprise .NET Expansion</h3>
+                    <div class="text-xs font-mono text-textMuted">Spring Boot • Spring Security • ASP.NET Core MVC • EF Core</div>
+                    <p class="text-textMuted text-sm leading-relaxed pt-2 font-light">
+                        Mastering enterprise-grade design patterns: Dependency Injection, Inversion of Control, Repository pattern, ORM relational mappings, LINQ queries, and database migrations.
+                    </p>
+                </div>
+
+                <!-- Phase 06 -->
+                <div class="relative reveal space-y-2 group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-darkBg border-2 border-cyanAccent group-hover:bg-cyanAccent transition-all shadow-md shadow-cyanAccent/50"></div>
+                    <div class="text-xs font-mono text-cyanAccent uppercase tracking-widest font-bold">PHASE 06</div>
+                    <h3 class="text-xl font-bold text-white">Now Scaling: AI Engineering & Infrastructure</h3>
+                    <div class="text-xs font-mono text-textMuted">Docker • Redis • Practical AI Integrations</div>
+                    <p class="text-textMuted text-sm leading-relaxed pt-2 font-light">
+                        Containerizing services with Docker, caching with Redis, and embedding intelligent agent workflows into web systems.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-28 relative z-10">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="font-mono text-xs text-cyanAccent uppercase tracking-widest mb-3 reveal">// GET.IN.TOUCH — CONNECT</div>
+            <h2 class="text-3xl sm:text-5xl font-extrabold uppercase text-white mb-4 reveal tracking-tight">Let's Build Something Scalable.</h2>
+            <p class="text-textMuted text-sm sm:text-base max-w-lg mx-auto mb-16 reveal font-light">
+                Open for SDE roles, full-stack software development opportunities, and technical collaborations.
+            </p>
+
+            <!-- Direct Contact Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left reveal">
+                
+                <!-- Email Card -->
+                <div class="glass-panel glass-panel-glow p-8 rounded-3xl space-y-5 border border-cyanAccent/30 flex flex-col justify-between group hover:border-cyanAccent transition-all">
+                    <div class="space-y-3">
+                        <div class="w-12 h-12 rounded-2xl bg-cyanAccent/10 border border-cyanAccent/30 flex items-center justify-center text-cyanAccent text-xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Direct Email</h3>
+                        <p class="text-textMuted text-xs font-mono break-all">parthdani17@gmail.com</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+                        <a href="mailto:parthdani17@gmail.com" class="text-cyanAccent hover:underline flex items-center space-x-1">
+                            <span>Send Email</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                        <button onclick="copyToClipboard('parthdani17@gmail.com', 'Email address copied!')" title="Copy Email" class="px-2.5 py-1 rounded-md bg-white/5 hover:bg-white/10 text-textMuted hover:text-white transition-colors">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- GitHub Card -->
+                <div class="glass-panel p-8 rounded-3xl space-y-5 border border-white/10 flex flex-col justify-between group hover:border-cyanAccent/50 transition-all">
+                    <div class="space-y-3">
+                        <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white text-xl group-hover:text-cyanAccent group-hover:scale-110 transition-all">
+                            <i class="fa-brands fa-github"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">GitHub</h3>
+                        <p class="text-textMuted text-xs font-mono">github.com/ParthDani17</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+                        <a href="https://github.com/ParthDani17" target="_blank" rel="noopener noreferrer" class="text-cyanAccent hover:underline flex items-center space-x-1">
+                            <span>View Profile</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- LinkedIn Card -->
+                <div class="glass-panel p-8 rounded-3xl space-y-5 border border-white/10 flex flex-col justify-between group hover:border-cyanAccent/50 transition-all">
+                    <div class="space-y-3">
+                        <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white text-xl group-hover:text-cyanAccent group-hover:scale-110 transition-all">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">LinkedIn</h3>
+                        <p class="text-textMuted text-xs font-mono">linkedin.com/in/parth-dani17</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+                        <a href="https://www.linkedin.com/in/parth-dani17/" target="_blank" rel="noopener noreferrer" class="text-cyanAccent hover:underline flex items-center space-x-1">
+                            <span>Connect</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Huge Outline Name Watermark Section -->
+    <div class="overflow-hidden py-14 text-center relative z-10 flex items-center justify-center">
+        <div class="outline-watermark">PARTH DANI</div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-white/10 text-xs font-mono text-textMuted relative z-10 bg-darkBg">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-cyanAccent animate-pulse"></span>
+                <span>SYSTEM STATUS: ALL SERVERS OPERATIONAL</span>
+            </div>
+            <p>&copy; 2026 Parth Dani &bull; B.Tech Computer Engineering @ DDU</p>
+            <div>
+                <button onclick="scrollToTop()" title="Back to Top" class="w-10 h-10 rounded-full border border-white/10 hover:border-cyanAccent/60 bg-white/5 flex items-center justify-center text-white hover:text-cyanAccent hover:scale-110 transition-all shadow-md">
+                    <i class="fa-solid fa-arrow-up text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Architecture Details Modal -->
+    <div id="project-modal" class="fixed inset-0 z-[200] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass-panel glass-panel-glow p-6 sm:p-8 rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto space-y-6 border border-cyanAccent/40 text-left">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                <h3 class="text-2xl font-bold text-white font-mono" id="modal-title">Project Details</h3>
+                <button onclick="closeProjectModal()" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+            <div class="space-y-4 text-xs font-mono text-textMuted leading-relaxed" id="modal-content">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive PDF Resume Viewer Modal -->
+    <div id="resume-modal" class="fixed inset-0 z-[200] bg-black/85 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass-panel glass-panel-glow rounded-3xl max-w-5xl w-full h-[90vh] flex flex-col border border-cyanAccent/40 shadow-2xl overflow-hidden">
+            <!-- Modal Header Bar -->
+            <div class="bg-cardBg/90 px-6 py-4 flex items-center justify-between border-b border-white/10 font-mono text-xs">
+                <div class="flex items-center space-x-3">
+                    <span class="w-3 h-3 rounded-full bg-cyanAccent animate-pulse"></span>
+                    <span class="text-white font-bold text-sm tracking-wide">ParthDani_Resume.pdf</span>
+                    <span class="px-2.5 py-0.5 rounded bg-cyanAccent/10 text-cyanAccent border border-cyanAccent/20 text-[10px] hidden sm:inline-block">OFFICIAL B.TECH CE RESUME</span>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <a href="ParthDani_Resume.pdf" target="_blank" download="ParthDani_Resume.pdf" class="px-3.5 py-1.5 rounded-lg bg-cyanAccent/10 border border-cyanAccent/40 hover:bg-cyanAccent hover:text-slate-950 text-cyanAccent transition-all text-xs font-mono flex items-center space-x-1.5 shadow-sm" title="Download PDF Resume">
+                        <i class="fa-solid fa-download text-xs"></i>
+                        <span class="hidden sm:inline">Download PDF</span>
+                    </a>
+                    <a href="ParthDani_Resume.pdf" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-cyanAccent/40 text-textMuted hover:text-white transition-all text-xs font-mono flex items-center space-x-1.5" title="Open PDF in Full Screen">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        <span class="hidden sm:inline">Full Tab</span>
+                    </a>
+                    <button onclick="closeResumeModal()" class="w-8 h-8 rounded-full bg-white/5 hover:bg-red-500/20 text-white hover:text-red-400 flex items-center justify-center transition-colors">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PDF Embed Viewer Container -->
+            <div class="flex-grow relative bg-cardBg flex flex-col items-center justify-center overflow-hidden p-2">
+                <object data="ParthDani_Resume.pdf" type="application/pdf" class="w-full h-full rounded-xl border border-white/10">
+                    <iframe id="resume-iframe" src="ParthDani_Resume.pdf" class="w-full h-full rounded-xl border border-white/10" title="Parth Dani Resume Viewer">
+                        <p class="text-white text-xs font-mono p-4">Your browser does not support inline PDF viewing. <a href="ParthDani_Resume.pdf" target="_blank" class="text-cyanAccent underline">Click here to download ParthDani_Resume.pdf</a>.</p>
+                    </iframe>
+                </object>
+            </div>
+
+            <!-- Modal Footer Bar -->
+            <div class="bg-cardBg px-6 py-3 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between font-mono text-xs text-textMuted gap-2">
+                <span class="text-[11px]">Parth Dani &bull; B.Tech Computer Engineering @ DDU</span>
+                <div class="flex items-center space-x-4">
+                    <button onclick="copyToClipboard('parthdani17@gmail.com', 'Email copied!')" class="hover:text-cyanAccent transition-colors">parthdani17@gmail.com</button>
+                    <button onclick="closeResumeModal()" class="text-xs text-white/50 hover:text-white">Close [Esc]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // ----------------------------------------------------
+        // 1. 3D Particle Constellation Canvas
+        // ----------------------------------------------------
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 140 };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.6;
+                this.vy = (Math.random() - 0.5) * 0.6;
+                this.radius = Math.random() * 1.5 + 0.8;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#00e5bf';
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = '#00e5bf';
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                // Mouse Interaction
+                if (mouse.x != null && mouse.y != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < mouse.radius) {
+                        let force = (mouse.radius - dist) / mouse.radius;
+                        this.x -= (dx / dist) * force * 2;
+                        this.y -= (dy / dist) * force * 2;
+                    }
+                }
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor((canvas.width * canvas.height) / 18000), 80);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distSq = dx * dx + dy * dy;
+
+                    if (distSq < 14400) {
+                        let dist = Math.sqrt(distSq);
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(0, 229, 191, ${0.15 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        resizeCanvas();
+        animateParticles();
+
+        // ----------------------------------------------------
+        // 2. Custom Cursor Follower
+        // ----------------------------------------------------
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+        let mouseX = 0, mouseY = 0;
+        let ringX = 0, ringY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.opacity = '1';
+            cursorRing.style.opacity = '1';
+            cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+        });
+
+        function renderCursor() {
+            ringX += (mouseX - ringX) * 0.18;
+            ringY += (mouseY - ringY) * 0.18;
+            cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+            requestAnimationFrame(renderCursor);
+        }
+        requestAnimationFrame(renderCursor);
+
+        // Hover reactions
+        document.querySelectorAll('a, button, input, textarea, .skill-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorRing.style.width = '52px';
+                cursorRing.style.height = '52px';
+                cursorRing.style.borderColor = '#00e5bf';
+                cursorRing.style.backgroundColor = 'rgba(0, 229, 191, 0.08)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorRing.style.width = '36px';
+                cursorRing.style.height = '36px';
+                cursorRing.style.borderColor = 'rgba(0, 229, 191, 0.5)';
+                cursorRing.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // ----------------------------------------------------
+        // 3. Audio SFX via Web Audio API (Optional Toggle)
+        // ----------------------------------------------------
+        let sfxEnabled = false;
+        let audioCtx = null;
+
+        function toggleAudioSFX() {
+            sfxEnabled = !sfxEnabled;
+            if (sfxEnabled && !audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            const icon = document.getElementById('sfx-icon');
+            const iconMobile = document.getElementById('sfx-icon-mobile');
+            if (sfxEnabled) {
+                icon.className = 'fa-solid fa-volume-high text-cyanAccent';
+                if (iconMobile) iconMobile.className = 'fa-solid fa-volume-high text-cyanAccent mr-1';
+                showToast('Sound Effects Enabled 🔊');
+                playSynthTone(600, 0.05);
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark text-textMuted';
+                if (iconMobile) iconMobile.className = 'fa-solid fa-volume-xmark text-textMuted mr-1';
+                showToast('Sound Effects Muted 🔇');
+            }
+        }
+
+        function playSynthTone(freq, duration) {
+            if (!sfxEnabled || !audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        // ----------------------------------------------------
+        // 4. Scroll Reveal Observer & Smooth Counter Animations
+        // ----------------------------------------------------
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const targetEl = entry.target;
+                const isSkillCard = targetEl.classList.contains('skill-card');
+
+                if (entry.isIntersecting) {
+                    targetEl.classList.add('active');
+
+                    if (isSkillCard && !targetEl._animated) {
+                        targetEl._animated = true;
+                        const targetVal = parseInt(targetEl.dataset.target) || 0;
+                        const pctEl = targetEl.querySelector('.skill-pct');
+                        const barEl = targetEl.querySelector('.skill-bar');
+
+                        if (targetVal && pctEl && barEl) {
+                            barEl.style.transition = 'width 0.9s cubic-bezier(0.16, 1, 0.3, 1)';
+                            barEl.style.width = targetVal + '%';
+
+                            let startTime = null;
+                            const duration = 850;
+
+                            function animateCounter(timestamp) {
+                                if (!startTime) startTime = timestamp;
+                                const progress = Math.min((timestamp - startTime) / duration, 1);
+                                // Ultra smooth cubic ease-out to match CSS transition curve
+                                const ease = 1 - Math.pow(1 - progress, 3);
+                                pctEl.textContent = Math.round(ease * targetVal) + '%';
+
+                                if (progress < 1) {
+                                    requestAnimationFrame(animateCounter);
+                                }
+                            }
+                            requestAnimationFrame(animateCounter);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .skill-card').forEach(el => observer.observe(el));
+
+        // ----------------------------------------------------
+        // 5. Skills Filter & Live Search Logic
+        // ----------------------------------------------------
+        function filterSkills(category, evt) {
+            playSynthTone(500, 0.04);
+            const searchInput = document.getElementById('skill-search');
+            if (searchInput) searchInput.value = '';
+
+            const buttons = document.querySelectorAll('#skill-filters button');
+            buttons.forEach(btn => {
+                btn.classList.remove('border-cyanAccent', 'text-cyanAccent', 'bg-cyanAccent/10', 'border-amber-500/40', 'text-amber-400', 'bg-amber-500/10');
+                btn.classList.add('border-white/10', 'text-textMuted');
+            });
+            
+            const targetBtn = evt ? (evt.currentTarget || evt.target || evt) : (typeof event !== 'undefined' ? (event.currentTarget || event.target) : null);
+            if (targetBtn && targetBtn.classList) {
+                targetBtn.classList.remove('border-white/10', 'text-textMuted');
+                if (category === 'exploring') {
+                    targetBtn.classList.add('border-amber-500/40', 'text-amber-400', 'bg-amber-500/10');
+                } else {
+                    targetBtn.classList.add('border-cyanAccent', 'text-cyanAccent', 'bg-cyanAccent/10');
+                }
+            }
+
+            const cards = document.querySelectorAll('.skill-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category.includes(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function searchSkills() {
+            const query = document.getElementById('skill-search').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.skill-card');
+            cards.forEach(card => {
+                const name = card.dataset.name.toLowerCase();
+                if (name.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // ----------------------------------------------------
+        // 6. Interactive Terminal Logic
+        // ----------------------------------------------------
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalHistory = document.getElementById('terminal-history');
+        const terminalScreen = document.getElementById('terminal-screen');
+
+        const commands = {
+            whoami: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs">
+                    <div><span class="text-textMuted inline-block w-20">name:</span> <span class="text-white font-bold">Parth Dani</span></div>
+                    <div><span class="text-textMuted inline-block w-20">degree:</span> <span class="text-white">B.Tech Computer Engineering</span></div>
+                    <div><span class="text-textMuted inline-block w-20">univ:</span> <span class="text-cyanAccent font-bold">Dharmsinh Desai University (DDU)</span></div>
+                    <div><span class="text-textMuted inline-block w-20">github:</span> <span class="text-white font-bold">github.com/ParthDani17</span></div>
+                    <div><span class="text-textMuted inline-block w-20">leetcode:</span> <span class="text-cyanAccent font-bold">leetcode.com/u/ParthDani</span></div>
+                    <div><span class="text-textMuted inline-block w-20">role:</span> <span class="text-white">Full-Stack & Backend Engineer</span></div>
+                </div>
+            `,
+            skills: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs">
+                    <div><span class="text-textMuted inline-block w-20">langs:</span> <span class="text-white">C/C++ · Java · Python · JavaScript · TypeScript · PHP</span></div>
+                    <div><span class="text-textMuted inline-block w-20">frontend:</span> <span class="text-white">React · React Native · TailwindCSS · Bootstrap</span></div>
+                    <div><span class="text-textMuted inline-block w-20">backend:</span> <span class="text-white">Node/Express · Spring Boot · Django · Hibernate</span></div>
+                    <div><span class="text-textMuted inline-block w-20">data:</span> <span class="text-white">MongoDB · PostgreSQL · MySQL · SQLite · Firebase</span></div>
+                    <div><span class="text-textMuted inline-block w-20">tools:</span> <span class="text-white">Git · Postman · JWT · Cloudinary</span></div>
+                    <div><span class="text-textMuted inline-block w-20">exploring:</span> <span class="text-amber-400">Docker · Redis (Containerization & In-Memory Caching)</span></div>
+                </div>
+            `,
+            stack: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs">
+                    <div><span class="text-textMuted inline-block w-20">langs:</span> <span class="text-white">C/C++ · Java · Python · JavaScript · TypeScript · PHP</span></div>
+                    <div><span class="text-textMuted inline-block w-20">frontend:</span> <span class="text-white">React · React Native · TailwindCSS · Bootstrap</span></div>
+                    <div><span class="text-textMuted inline-block w-20">backend:</span> <span class="text-white">Node/Express · Spring Boot · Django · Hibernate</span></div>
+                    <div><span class="text-textMuted inline-block w-20">data:</span> <span class="text-white">MongoDB · PostgreSQL · MySQL · SQLite · Firebase</span></div>
+                    <div><span class="text-textMuted inline-block w-20">tools:</span> <span class="text-white">Git · Postman · JWT · Cloudinary</span></div>
+                    <div><span class="text-textMuted inline-block w-20">exploring:</span> <span class="text-amber-400">Docker · Redis (Containerization & In-Memory Caching)</span></div>
+                </div>
+            `,
+            projects: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs">
+                    <div><span class="text-textMuted inline-block w-20">flagship:</span> <span class="text-cyanAccent font-bold">SkillBridge</span> <span class="text-white">— MERN Peer Learning Platform</span></div>
+                    <div><span class="text-textMuted inline-block w-20">spring:</span> <span class="text-white">Event Registration API (Spring Boot + MySQL)</span></div>
+                    <div><span class="text-textMuted inline-block w-20">ai-project:</span> <span class="text-white">AI Scholarship Finder (Django + OpenRouter AI API)</span></div>
+                    <div><span class="text-textMuted inline-block w-20">django:</span> <span class="text-white">News Pulse (News Aggregation & Curation)</span></div>
+                </div>
+            `,
+            skillbridge: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs">
+                    <div><span class="text-textMuted inline-block w-20">platform:</span> <span class="text-cyanAccent font-bold">SkillBridge (MERN Peer Learning System)</span></div>
+                    <div><span class="text-textMuted inline-block w-20">backend:</span> <span class="text-white">Node.js, Express.js (Controller-Route-Model Architecture)</span></div>
+                    <div><span class="text-textMuted inline-block w-20">security:</span> <span class="text-white">JWT Authentication, Bcrypt Hashing, Role Middleware</span></div>
+                    <div><span class="text-textMuted inline-block w-20">media:</span> <span class="text-white">Multer Uploads, Cloudinary Media Storage Integration</span></div>
+                    <div><span class="text-textMuted inline-block w-20">database:</span> <span class="text-white">MongoDB & Mongoose ODM Indexed Schemas</span></div>
+                </div>
+            `,
+            focus: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs">
+                    <div><span class="text-textMuted inline-block w-20">backend:</span> <span class="text-white">Scalable Systems Architecture (MERN & Spring Boot)</span></div>
+                    <div><span class="text-textMuted inline-block w-20">frontend:</span> <span class="text-white">Interactive Web Applications (React & TailwindCSS)</span></div>
+                    <div><span class="text-textMuted inline-block w-20">data:</span> <span class="text-white">Relational & NoSQL Database Schema Optimization</span></div>
+                    <div><span class="text-textMuted inline-block w-20">dsa:</span> <span class="text-white">C/C++ Algorithmic Optimization & Problem Solving</span></div>
+                </div>
+            `,
+            education: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs">
+                    <div><span class="text-textMuted inline-block w-20">univ:</span> <span class="text-cyanAccent font-bold">Dharmsinh Desai University (DDU), Nadiad</span></div>
+                    <div><span class="text-textMuted inline-block w-20">degree:</span> <span class="text-white">B.Tech in Computer Engineering</span></div>
+                    <div><span class="text-textMuted inline-block w-20">courses:</span> <span class="text-white">DSA, OOP, DBMS, DAA, OS, Computer Networks</span></div>
+                </div>
+            `,
+            ddu: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs">
+                    <div><span class="text-textMuted inline-block w-20">univ:</span> <span class="text-cyanAccent font-bold">Dharmsinh Desai University (DDU), Nadiad</span></div>
+                    <div><span class="text-textMuted inline-block w-20">degree:</span> <span class="text-white">B.Tech in Computer Engineering</span></div>
+                    <div><span class="text-textMuted inline-block w-20">courses:</span> <span class="text-white">DSA, OOP, DBMS, DAA, OS, Computer Networks</span></div>
+                </div>
+            `,
+            experience: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs">
+                    <div><span class="text-textMuted inline-block w-20">mern:</span> <span class="text-white">Full-Stack Development (SkillBridge Peer Platform)</span></div>
+                    <div><span class="text-textMuted inline-block w-20">java:</span> <span class="text-white">Spring Boot REST API, Spring Security, Hibernate ORM</span></div>
+                    <div><span class="text-textMuted inline-block w-20">django:</span> <span class="text-white">AI Scholarship Finder & News Pulse Aggregator</span></div>
+                    <div><span class="text-textMuted inline-block w-20">infra:</span> <span class="text-white">Docker Containerization, Git, Postman, MongoDB & Postgres</span></div>
+                </div>
+            `,
+            contact: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs">
+                    <div><span class="text-textMuted inline-block w-20">email:</span> <span class="text-cyanAccent font-bold">parthdani17@gmail.com</span></div>
+                    <div><span class="text-textMuted inline-block w-20">github:</span> <span class="text-white">github.com/ParthDani17</span></div>
+                    <div><span class="text-textMuted inline-block w-20">linkedin:</span> <span class="text-white">linkedin.com/in/parth-dani17</span></div>
+                    <div><span class="text-textMuted inline-block w-20">leetcode:</span> <span class="text-white">leetcode.com/u/ParthDani</span></div>
+                </div>
+            `,
+            leetcode: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs">
+                    <div><span class="text-textMuted inline-block w-20">profile:</span> <span class="text-cyanAccent font-bold">leetcode.com/u/ParthDani</span></div>
+                    <div><span class="text-textMuted inline-block w-20">focus:</span> <span class="text-white">Algorithmic Problem Solving & Data Structures in C/C++</span></div>
+                </div>
+            `,
+            help: `
+                <div class="mt-1.5 mb-2 space-y-1 font-mono text-xs text-textMuted">
+                    <div><span class="text-cyanAccent inline-block w-24">whoami</span> — Display engineer profile & background</div>
+                    <div><span class="text-cyanAccent inline-block w-24">skills</span> — Inspected technical stack (langs, backend, data, tools)</div>
+                    <div><span class="text-cyanAccent inline-block w-24">projects</span> — Featured platforms & architecture highlights</div>
+                    <div><span class="text-cyanAccent inline-block w-24">focus</span> — Engineering focus & specialization</div>
+                    <div><span class="text-cyanAccent inline-block w-24">education</span> — DDU degree & core coursework</div>
+                    <div><span class="text-cyanAccent inline-block w-24">contact</span> — Email, GitHub, LinkedIn, and LeetCode profiles</div>
+                    <div><span class="text-cyanAccent inline-block w-24">leetcode</span> — View LeetCode coding profile</div>
+                    <div><span class="text-cyanAccent inline-block w-24">clear</span> — Clear terminal output history</div>
+                </div>
+            `
+        };
+
+        function executeTerminalCommand(cmdRaw) {
+            if (!cmdRaw) return;
+            const cmd = cmdRaw.trim().toLowerCase();
+            if (!cmd) return;
+
+            playSynthTone(400, 0.02);
+
+            if (cmd === 'clear') {
+                terminalHistory.innerHTML = '';
+                terminalInput.value = '';
+                return;
+            }
+
+            const userLine = document.createElement('div');
+            userLine.innerHTML = `<span class="text-cyanAccent">➜ ~</span> ${escapeHtml(cmdRaw.trim())}`;
+            terminalHistory.appendChild(userLine);
+
+            if (commands[cmd]) {
+                const responseLine = document.createElement('div');
+                responseLine.className = 'text-white mt-1 mb-2 font-mono';
+                responseLine.innerHTML = commands[cmd];
+                terminalHistory.appendChild(responseLine);
+            } else {
+                const errorLine = document.createElement('div');
+                errorLine.className = 'text-red-400 mt-1 mb-2 font-mono';
+                errorLine.textContent = `zsh: command not found: ${cmd}. Type 'help' for available commands.`;
+                terminalHistory.appendChild(errorLine);
+            }
+
+            terminalInput.value = '';
+            setTimeout(() => {
+                terminalScreen.scrollTop = terminalScreen.scrollHeight;
+            }, 10);
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                executeTerminalCommand(terminalInput.value);
+            }
+        });
+
+        window.runCommand = function(cmd) {
+            executeTerminalCommand(cmd);
+        };
+
+        // ----------------------------------------------------
+        // 7. Project Modal Details & Modal UX Listeners
+        // ----------------------------------------------------
+        const projectData = {
+            SkillBridge: {
+                title: "SkillBridge — Peer Learning MERN Platform",
+                content: `
+                    <p><strong class="text-white">Overview:</strong> Full-stack MERN application connecting learners and mentors with peer learning requests, scheduling, and reviews.</p>
+                    <p><strong class="text-white">Backend Architecture:</strong> Modular Controller-Route-Model-Middleware design. Includes JWT authentication, bcrypt password hashing, and custom middleware.</p>
+                    <p><strong class="text-white">Media Pipelines:</strong> Integrated Multer middleware with Cloudinary API for document, resume, and avatar storage.</p>
+                    <p><strong class="text-white">Database Design:</strong> MongoDB with Mongoose ODM modeling indexed relationships for user profiles, session slots, ratings, and notification logs.</p>
+                `
+            },
+            Eventify: {
+                title: "Event Registration System (Eventify)",
+                content: `
+                    <p><strong class="text-white">Overview:</strong> Solo backend REST API for managing event registrations with comprehensive REST endpoints.</p>
+                    <p><strong class="text-white">Frameworks & Security:</strong> Built using Java 17, Spring Boot, Spring Security (stateless role-based auth), and Hibernate ORM.</p>
+                    <p><strong class="text-white">Data Layer:</strong> MySQL relational database mapping clean entity models with transaction management.</p>
+                    <p><strong class="text-white">API Documentation:</strong> Full Postman collection for all registration, user, and administrative endpoints.</p>
+                `
+            },
+            AIScholarship: {
+                title: "AI Scholarship Finder",
+                content: `
+                    <p><strong class="text-white">Overview:</strong> Hackathon team project delivering an intelligent scholarship discovery engine for students.</p>
+                    <p><strong class="text-white">AI Integration:</strong> Connected OpenRouter AI API with custom prompt engineering to match student profiles against active scholarship parameters.</p>
+                    <p><strong class="text-white">Full-Stack Integration:</strong> Python Django backend driving real-time query responses with TailwindCSS UI.</p>
+                `
+            },
+            NewsPulse: {
+                title: "News Pulse Aggregator",
+                content: `
+                    <p><strong class="text-white">Overview:</strong> Academic project building a dynamic news aggregation and curation platform.</p>
+                    <p><strong class="text-white">Backend & Curation:</strong> Python Django backend managing category feeds, user preferences, and real-time news indexing on PostgreSQL.</p>
+                    <p><strong class="text-white">Frontend Interactivity:</strong> Responsive HTML5/CSS3 interface powered by async JavaScript fetching.</p>
+                `
+            }
+        };
+
+        function openProjectModal(key) {
+            playSynthTone(700, 0.05);
+            const modal = document.getElementById('project-modal');
+            const data = projectData[key];
+            if (data) {
+                document.getElementById('modal-title').textContent = data.title;
+                document.getElementById('modal-content').innerHTML = data.content;
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function closeProjectModal() {
+            playSynthTone(300, 0.04);
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function openResumeModal() {
+            playSynthTone(750, 0.06);
+            const modal = document.getElementById('resume-modal');
+            if (modal) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function closeResumeModal() {
+            playSynthTone(300, 0.04);
+            const modal = document.getElementById('resume-modal');
+            if (modal) {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // Close modals on ESC key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeProjectModal();
+                closeResumeModal();
+            }
+        });
+
+        // Close modals on backdrop click
+        document.getElementById('project-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'project-modal') closeProjectModal();
+        });
+
+        document.getElementById('resume-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'resume-modal') closeResumeModal();
+        });
+
+        // ----------------------------------------------------
+        // 8. Clipboard Toast Notifications & Scroll Helpers
+        function copyToClipboard(text, message) {
+            navigator.clipboard.writeText(text).then(() => {
+                playSynthTone(750, 0.04);
+                showToast(message || 'Copied to clipboard!');
+            });
+        }
+
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'px-4 py-3 rounded-xl bg-cardBg border border-cyanAccent/40 text-cyanAccent font-mono text-xs shadow-2xl flex items-center space-x-2 pointer-events-auto transition-all duration-300 transform translate-y-2 opacity-0 max-w-[90vw]';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-cyanAccent"></i> <span>${msg}</span>`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Smooth Scroll To Top Helper
+        function scrollToTop() {
+            playSynthTone(600, 0.04);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile Menu Drawer Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        document.getElementById('menu-btn').addEventListener('click', toggleMobileMenu);
+
+        // ----------------------------------------------------
+        // 9. Cyber Preloader (0% to 100% Screen Loading Controller)
+        // ----------------------------------------------------
+        (function() {
+            let currentPct = 0;
+            let targetPct = 0;
+            let isLoaded = false;
+
+            const pctEl = document.getElementById('loader-pct');
+            const barEl = document.getElementById('loader-bar');
+            const statusEl = document.getElementById('loader-status');
+            const preloader = document.getElementById('preloader');
+
+            if (!pctEl || !barEl || !preloader) return;
+
+            const statusMessages = [
+                { threshold: 0, text: "Initializing Cyberspace Core..." },
+                { threshold: 25, text: "Loading System Modules & Assets..." },
+                { threshold: 50, text: "Compiling 3D Canvas Mesh..." },
+                { threshold: 75, text: "Mounting Interactive Components..." },
+                { threshold: 90, text: "Verifying Security Protocols..." },
+                { threshold: 100, text: "System Ready. Access Granted." }
+            ];
+
+            function updateStatus(pct) {
+                let msg = statusMessages[0].text;
+                for (let i = 0; i < statusMessages.length; i++) {
+                    if (pct >= statusMessages[i].threshold) {
+                        msg = statusMessages[i].text;
+                    }
+                }
+                if (statusEl && statusEl.textContent !== msg) {
+                    statusEl.textContent = msg;
+                }
+            }
+
+            // Increment baseline progress up to 90% while page loads
+            const progressTimer = setInterval(() => {
+                if (targetPct < 90) {
+                    targetPct += Math.floor(Math.random() * 8) + 5;
+                    if (targetPct > 90) targetPct = 90;
+                }
+            }, 55);
+
+            function finishLoading() {
+                if (isLoaded) return;
+                isLoaded = true;
+                clearInterval(progressTimer);
+                targetPct = 100;
+            }
+
+            if (document.readyState === 'complete') {
+                finishLoading();
+            } else {
+                window.addEventListener('load', finishLoading);
+                // Fallback max duration 1.2s to guarantee smooth entry
+                setTimeout(finishLoading, 1200);
+            }
+
+            function animateLoader() {
+                if (currentPct < targetPct) {
+                    const diff = targetPct - currentPct;
+                    const step = Math.max(1, Math.ceil(diff * 0.18));
+                    currentPct = Math.min(targetPct, currentPct + step);
+
+                    pctEl.textContent = `${currentPct}%`;
+                    barEl.style.width = `${currentPct}%`;
+                    updateStatus(currentPct);
+                }
+
+                if (currentPct >= 100 && isLoaded) {
+                    pctEl.textContent = '100%';
+                    barEl.style.width = '100%';
+                    updateStatus(100);
+
+                    setTimeout(() => {
+                        preloader.classList.add('loaded');
+                        document.documentElement.classList.remove('loading');
+                        document.body.classList.remove('loading');
+                    }, 280);
+                } else {
+                    requestAnimationFrame(animateLoader);
+                }
+            }
+
+            requestAnimationFrame(animateLoader);
+        })();
+    </script>
+</body>
+</html>
