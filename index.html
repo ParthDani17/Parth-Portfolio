@@ -313,6 +313,100 @@
             visibility: hidden;
             pointer-events: none;
         }
+
+        /* 3D Flip Card Container & Faces */
+        .perspective-container {
+            perspective: 1400px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.75s cubic-bezier(0.34, 1.35, 0.64, 1);
+        }
+        .flip-card-inner.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .flip-face {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform-style: preserve-3d;
+        }
+        .flip-face-front {
+            z-index: 2;
+        }
+
+        /* Prevent .glass-panel:hover transform from overriding rotateY and jittering */
+        #photo-card-face,
+        #photo-card-face:hover,
+        .flip-card-inner #photo-card-face:hover {
+            transform: rotateY(0deg) !important;
+        }
+        #terminal-card-face,
+        #terminal-card-face:hover,
+        .flip-card-inner #terminal-card-face:hover {
+            transform: rotateY(180deg) !important;
+        }
+
+        /* Strict pointer-events to prevent backface hover interception */
+        .flip-card-inner:not(.is-flipped) #terminal-card-face {
+            pointer-events: none !important;
+            user-select: none;
+        }
+        .flip-card-inner:not(.is-flipped) #photo-card-face {
+            pointer-events: auto !important;
+        }
+        .flip-card-inner.is-flipped #photo-card-face {
+            pointer-events: none !important;
+            user-select: none;
+        }
+        .flip-card-inner.is-flipped #terminal-card-face {
+            pointer-events: auto !important;
+        }
+
+        /* Laser beam / energy launch animation styling */
+        @keyframes cyberPulseWave {
+            0% {
+                box-shadow: 0 0 0 0 rgba(102, 163, 191, 0.9);
+                transform: scale(0.97);
+            }
+            50% {
+                box-shadow: 0 0 28px 8px rgba(102, 163, 191, 0.6), 0 0 10px rgba(255, 252, 225, 0.5);
+                transform: scale(1.02);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(102, 163, 191, 0);
+                transform: scale(1);
+            }
+        }
+        .btn-launching {
+            animation: cyberPulseWave 0.55s ease-out;
+            border-color: #66A3BF !important;
+            color: #FFFCE1 !important;
+        }
+
+        @keyframes cardShockwaveGlow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(102, 163, 191, 0.95), 0 0 25px rgba(255, 252, 225, 0.8);
+                border-color: rgba(255, 252, 225, 0.95);
+            }
+            50% {
+                box-shadow: 0 0 60px 18px rgba(102, 163, 191, 0.7), 0 0 35px rgba(255, 252, 225, 0.5);
+                border-color: rgba(102, 163, 191, 0.85);
+            }
+            100% {
+                box-shadow: 0 12px 35px -10px rgba(102, 163, 191, 0.25);
+                border-color: rgba(102, 163, 191, 0.3);
+            }
+        }
+        .card-impact {
+            animation: cardShockwaveGlow 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Subtle hologram scanline for photo card */
+        .cyber-scanlines {
+            background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18) 1px, transparent 1px, transparent 3px);
+        }
     </style>
 </head>
 <body class="selection:bg-accentBlue selection:text-black relative loading">
@@ -392,7 +486,7 @@
                     <span>OPEN FOR SDE / FULL-STACK ROLES</span>
                 </span>
 
-                <a href="#terminal-section" class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:border-accentBlue/40 text-xs font-mono text-white transition-all flex items-center space-x-2">
+                <a href="#terminal-section" onclick="handleNavTerminalClick(event)" class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:border-accentBlue/40 text-xs font-mono text-white transition-all flex items-center space-x-2">
                     <span class="text-accentBlue">></span> <span>Terminal</span>
                 </a>
             </div>
@@ -462,10 +556,10 @@
                         <i class="fa-solid fa-file-pdf text-xs"></i>
                         <span>View Resume</span>
                     </button>
-                    <a href="#terminal-section" class="px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-medium text-xs tracking-widest uppercase hover:border-accentBlue/40 transition-all text-center flex items-center justify-center space-x-2">
-                        <span class="text-accentBlue">></span>
-                        <span>Launch Terminal</span>
-                    </a>
+                    <button id="hero-launch-terminal-btn" onclick="handleHeroLaunchClick(event)" class="px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-medium text-xs tracking-widest uppercase hover:border-accentBlue/50 hover:bg-accentBlue/10 transition-all text-center flex items-center justify-center space-x-2 shadow-lg shadow-black/40 group relative overflow-hidden" title="Launch Interactive Terminal">
+                        <span id="hero-launch-icon" class="text-accentBlue group-hover:scale-125 transition-transform">></span>
+                        <span id="hero-launch-text">Launch Terminal</span>
+                    </button>
                     <div class="flex items-center justify-center space-x-3 px-2">
                         <a href="https://github.com/ParthDani17" target="_blank" rel="noopener noreferrer" title="GitHub Profile" class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center text-textMuted hover:text-accentBlue hover:border-accentBlue/40 border border-white/10 transition-all"><i class="fa-brands fa-github text-base"></i></a>
                         <a href="https://www.linkedin.com/in/parth-dani17/" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile" class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center text-textMuted hover:text-accentBlue hover:border-accentBlue/40 border border-white/10 transition-all"><i class="fa-brands fa-linkedin-in text-base"></i></a>
@@ -487,60 +581,183 @@
                 </div>
             </div>
 
-            <!-- Right Interactive Terminal Widget -->
-            <div class="lg:col-span-5 reveal" id="terminal-section">
-                <div class="glass-panel glass-panel-glow rounded-2xl overflow-hidden shadow-2xl border border-accentBlue/30">
-                    <div class="bg-cardBg/90 px-4 py-3 flex items-center justify-between border-b border-white/10 font-mono text-xs text-textMuted">
-                        <div class="flex items-center space-x-2">
-                            <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block cursor-pointer" onclick="runCommand('clear')"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
-                            <span class="w-3 h-3 rounded-full bg-emerald-400 radar-emerald inline-block"></span>
+            <!-- Right Interactive 3D Flip Card: Photo Front / Terminal Back -->
+            <div class="lg:col-span-5 reveal perspective-container relative" id="terminal-section">
+                <!-- 3D Card Inner (Flips 180deg on demand) -->
+                <div id="hero-flip-card" class="flip-card-inner relative w-full h-[525px] transition-transform duration-700 [transform-style:preserve-3d]">
+                    
+                    <!-- FRONT FACE: Cyber Portrait Photo Card -->
+                    <div id="photo-card-face" class="flip-face flip-face-front absolute inset-0 w-full h-full glass-panel glass-panel-glow rounded-2xl overflow-hidden shadow-2xl border border-accentBlue/30 flex flex-col justify-between select-none cursor-pointer group" onclick="handlePhotoCardClick(event)" title="Click to launch interactive console">
+                        
+                        <!-- Top Cyber HUD Header (Matches Terminal Top Bar Exactly) -->
+                        <div class="bg-cardBg/90 px-4 py-3 flex items-center justify-between border-b border-white/10 font-mono text-xs text-textMuted">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-400 radar-emerald inline-block"></span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-white font-medium">
+                                <i class="fa-solid fa-id-badge text-accentBlue text-xs"></i>
+                                <span>parth@ddu-node — portrait.sys</span>
+                            </div>
+                            <button type="button" onclick="event.stopPropagation(); launchTerminalWithAnimation();" class="text-[10px] px-2.5 py-1 rounded bg-accentBlue/15 hover:bg-accentBlue hover:text-black text-accentBlue border border-accentBlue/30 transition-all flex items-center space-x-1.5 font-mono shadow-sm group-hover:border-accentBlue/60" title="Launch Interactive Terminal">
+                                <i class="fa-solid fa-terminal text-[9px]"></i>
+                                <span>Launch Terminal ⇄</span>
+                            </button>
                         </div>
-                        <span class="text-white font-medium">parth@ddu-node — zsh</span>
-                        <span class="text-[10px] px-2 py-0.5 rounded bg-accentBlue/10 text-accentBlue border border-accentBlue/20">v2.6 interactive</span>
-                    </div>
 
-                    <div class="p-5 font-mono text-xs space-y-3.5 terminal-body h-80 overflow-y-auto" id="terminal-screen" onclick="document.getElementById('terminal-input').focus()">
-                        <div class="text-textMuted leading-relaxed">
-                            Welcome to Parth's interactive console. Type <span class="text-accentBlue font-bold">help</span> or click quick actions below.
-                        </div>
-                        <div class="space-y-3" id="terminal-history">
-                            <div>
-                                <span class="text-accentBlue">➜ ~</span> whoami
-                                <div class="mt-1.5 space-y-1 font-mono text-xs">
-                                    <div><span class="text-textMuted inline-block w-20">name:</span> <span class="text-white font-bold">Parth Dani</span></div>
-                                    <div><span class="text-textMuted inline-block w-20">degree:</span> <span class="text-white">B.Tech Computer Engineering</span></div>
-                                    <div><span class="text-textMuted inline-block w-20">univ:</span> <span class="text-accentBlue font-bold">Dharmsinh Desai University (DDU)</span></div>
+                        <!-- Photo Showcase Body with Cyber Aesthetics -->
+                        <div class="relative flex-1 min-h-0 overflow-hidden bg-black/40">
+                            <!-- Real Photo -->
+                            <img src="./parth-dani-portrait.jpg" 
+                                 alt="Parth Dani — Full-Stack & AI Engineer" 
+                                 class="w-full h-full object-cover object-[center_12%] filter contrast-[1.04] brightness-[0.98] transition-transform duration-700 group-hover:scale-105">
+
+                            <!-- Scanlines Overlay -->
+                            <div class="absolute inset-0 pointer-events-none cyber-scanlines opacity-25"></div>
+
+                            <!-- Dual Vignette Gradients for Text Contrast and Cyber Glow -->
+                            <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent"></div>
+                            <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#0A0A0A]/70 via-transparent to-transparent"></div>
+
+                            <!-- Cyber HUD Corner Reticles -->
+                            <div class="absolute top-3.5 left-3.5 pointer-events-none">
+                                <div class="w-3.5 h-3.5 border-t-2 border-l-2 border-accentBlue/80"></div>
+                            </div>
+                            <div class="absolute top-3.5 right-3.5 pointer-events-none">
+                                <div class="w-3.5 h-3.5 border-t-2 border-r-2 border-accentBlue/80"></div>
+                            </div>
+                            <div class="absolute bottom-3.5 left-3.5 pointer-events-none">
+                                <div class="w-3.5 h-3.5 border-b-2 border-l-2 border-accentBlue/80"></div>
+                            </div>
+                            <div class="absolute bottom-3.5 right-3.5 pointer-events-none">
+                                <div class="w-3.5 h-3.5 border-b-2 border-r-2 border-accentBlue/80"></div>
+                            </div>
+
+                            <!-- Floating Badges Top -->
+                            <div class="absolute top-4 left-5 flex items-center space-x-2 pointer-events-none">
+                                <span class="px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-white font-mono text-[10px] tracking-wider uppercase flex items-center space-x-1.5 shadow-lg">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 radar-emerald"></span>
+                                    <span>SYSTEM ACTIVE</span>
+                                </span>
+                            </div>
+
+                            <div class="absolute top-4 right-5 pointer-events-none">
+                                <span class="px-2.5 py-0.5 rounded-full bg-accentBlue/15 backdrop-blur-md border border-accentBlue/30 text-accentBlue font-mono text-[10px] tracking-wider uppercase shadow-lg">
+                                    ENGINEER ID: 017
+                                </span>
+                            </div>
+
+                            <!-- Overlay Information at Bottom of Photo -->
+                            <div class="absolute bottom-3.5 left-5 right-5 space-y-2 pointer-events-none">
+                                <div class="flex items-end justify-between">
+                                    <div>
+                                        <div class="text-xl sm:text-2xl font-black uppercase tracking-tight text-white flex items-center space-x-2 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+                                            <span>Parth Dani</span>
+                                            <span class="text-xs font-mono text-accentBlue px-2 py-0.5 rounded bg-black/70 border border-accentBlue/40">DDU '26</span>
+                                        </div>
+                                        <div class="text-xs font-mono text-textLight/90 tracking-wide drop-shadow-[0_1px_5px_rgba(0,0,0,0.9)] mt-0.5">
+                                            Full-Stack & Backend Systems Architecture
+                                        </div>
+                                    </div>
+
+                                    <!-- Interactive Flip Pill -->
+                                    <div class="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-accentBlue/25 backdrop-blur-md border border-accentBlue/50 text-ivory text-xs font-mono shadow-xl group-hover:bg-accentBlue group-hover:text-black transition-all">
+                                        <span>Flip</span>
+                                        <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+                                    </div>
+                                </div>
+
+                                <!-- Mini Skill Badges -->
+                                <div class="flex flex-wrap gap-1.5 pt-0.5">
+                                    <span class="px-2 py-0.5 rounded bg-black/70 backdrop-blur-md border border-accentBlue/30 text-accentBlue font-mono text-[10px]">MERN Stack</span>
+                                    <span class="px-2 py-0.5 rounded bg-black/70 backdrop-blur-md border border-accentBlue/30 text-accentBlue font-mono text-[10px]">Java Spring Boot</span>
+                                    <span class="px-2 py-0.5 rounded bg-black/70 backdrop-blur-md border border-white/20 text-white font-mono text-[10px]">C/C++ DSA</span>
+                                    <span class="px-2 py-0.5 rounded bg-black/70 backdrop-blur-md border border-white/20 text-textMuted font-mono text-[10px]">Python Django</span>
                                 </div>
                             </div>
-                            <div>
-                                <span class="text-accentBlue">➜ ~</span> skills
-                                <div class="mt-1.5 space-y-1 font-mono text-xs">
-                                    <div><span class="text-textMuted inline-block w-20">langs:</span> <span class="text-white">C/C++ · Java · Python · JavaScript · TypeScript · PHP</span></div>
-                                    <div><span class="text-textMuted inline-block w-20">frontend:</span> <span class="text-white">React · React Native · TailwindCSS · Bootstrap</span></div>
-                                    <div><span class="text-textMuted inline-block w-20">backend:</span> <span class="text-white">Node/Express · Spring Boot · Django · Hibernate</span></div>
-                                    <div><span class="text-textMuted inline-block w-20">data:</span> <span class="text-white">MongoDB · PostgreSQL · MySQL · SQLite · Firebase</span></div>
-                                    <div><span class="text-textMuted inline-block w-20">tools:</span> <span class="text-white">Git · Postman · JWT · Cloudinary</span></div>
-                                    <div><span class="text-textMuted inline-block w-20">exploring:</span> <span class="text-amber-400">Docker · Redis (Containerization & In-Memory Caching)</span></div>
-                                </div>
-                            </div>
+                        </div>
+
+                        <!-- Bottom Action Bar (Matches Terminal Action Row Height) -->
+                        <div class="bg-cardBg/95 px-4 py-2.5 border-t border-white/10 flex items-center justify-between font-mono text-xs text-textMuted">
+                            <span class="flex items-center space-x-1.5 text-[11px]">
+                                <span class="text-accentBlue animate-pulse">></span>
+                                <span>Click anywhere to flip to interactive terminal</span>
+                            </span>
+                            <span class="text-accentBlue text-[11px] flex items-center space-x-1 group-hover:translate-x-0.5 transition-transform">
+                                <span class="underline decoration-accentBlue/40">Launch Terminal</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </span>
                         </div>
                     </div>
 
-                    <div class="bg-cardBg/95 px-4 py-3 border-t border-white/10 flex items-center space-x-2 font-mono text-xs">
-                        <span class="text-accentBlue font-bold">➜ ~</span>
-                        <input type="text" id="terminal-input" placeholder="Type 'skills', 'projects', 'contact', 'help'..." class="bg-transparent text-white focus:outline-none w-full font-mono text-xs placeholder:text-white/30">
+                    <!-- BACK FACE: Interactive Terminal Card -->
+                    <div id="terminal-card-face" class="flip-face flip-face-back absolute inset-0 w-full h-full glass-panel glass-panel-glow rounded-2xl overflow-hidden shadow-2xl border border-accentBlue/30 flex flex-col justify-between [transform:rotateY(180deg)]">
+                        <!-- Terminal Header -->
+                        <div class="bg-cardBg/90 px-4 py-3 flex items-center justify-between border-b border-white/10 font-mono text-xs text-textMuted">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block cursor-pointer hover:opacity-80" onclick="runCommand('clear')" title="Clear output"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-400 radar-emerald inline-block"></span>
+                            </div>
+                            <span class="text-white font-medium flex items-center space-x-1.5">
+                                <i class="fa-solid fa-terminal text-accentBlue text-xs"></i>
+                                <span>parth@ddu-node — zsh</span>
+                            </span>
+                            <div class="flex items-center space-x-2">
+                                <button type="button" onclick="flipToPhoto(event)" class="text-[10px] px-2 py-0.5 rounded bg-white/10 hover:bg-accentBlue/20 text-white hover:text-accentBlue border border-white/20 transition-all flex items-center space-x-1.5" title="Switch back to Portrait">
+                                    <i class="fa-solid fa-image text-accentBlue text-[10px]"></i>
+                                    <span>View Photo ⇄</span>
+                                </button>
+                                <span class="hidden sm:inline-block text-[10px] px-2 py-0.5 rounded bg-accentBlue/10 text-accentBlue border border-accentBlue/20">v2.6</span>
+                            </div>
+                        </div>
+
+                        <!-- Terminal Screen Content -->
+                        <div class="p-5 font-mono text-xs space-y-3.5 terminal-body flex-1 min-h-0 overflow-y-auto" id="terminal-screen" onclick="document.getElementById('terminal-input').focus()">
+                            <div class="text-textMuted leading-relaxed">
+                                Welcome to Parth's interactive console. Type <span class="text-accentBlue font-bold">help</span> or click quick actions below.
+                            </div>
+                            <div class="space-y-3" id="terminal-history">
+                                <div>
+                                    <span class="text-accentBlue">➜ ~</span> whoami
+                                    <div class="mt-1.5 space-y-1 font-mono text-xs">
+                                        <div><span class="text-textMuted inline-block w-20">name:</span> <span class="text-white font-bold">Parth Dani</span></div>
+                                        <div><span class="text-textMuted inline-block w-20">degree:</span> <span class="text-white">B.Tech Computer Engineering</span></div>
+                                        <div><span class="text-textMuted inline-block w-20">univ:</span> <span class="text-accentBlue font-bold">Dharmsinh Desai University (DDU)</span></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="text-accentBlue">➜ ~</span> skills
+                                    <div class="mt-1.5 space-y-1 font-mono text-xs">
+                                        <div><span class="text-textMuted inline-block w-20">langs:</span> <span class="text-white">C/C++ · Java · Python · JavaScript · TypeScript · PHP</span></div>
+                                        <div><span class="text-textMuted inline-block w-20">frontend:</span> <span class="text-white">React · React Native · TailwindCSS · Bootstrap</span></div>
+                                        <div><span class="text-textMuted inline-block w-20">backend:</span> <span class="text-white">Node/Express · Spring Boot · Django · Hibernate</span></div>
+                                        <div><span class="text-textMuted inline-block w-20">data:</span> <span class="text-white">MongoDB · PostgreSQL · MySQL · SQLite · Firebase</span></div>
+                                        <div><span class="text-textMuted inline-block w-20">tools:</span> <span class="text-white">Git · Postman · JWT · Cloudinary</span></div>
+                                        <div><span class="text-textMuted inline-block w-20">exploring:</span> <span class="text-amber-400">Docker · Redis (Containerization & In-Memory Caching)</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Command Input Bar -->
+                        <div class="bg-cardBg/95 px-4 py-3 border-t border-white/10 flex items-center space-x-2 font-mono text-xs">
+                            <span class="text-accentBlue font-bold">➜ ~</span>
+                            <input type="text" id="terminal-input" placeholder="Type 'skills', 'projects', 'contact', 'help'..." class="bg-transparent text-white focus:outline-none w-full font-mono text-xs placeholder:text-white/30">
+                        </div>
+
+                        <!-- Quick Command Action Buttons -->
+                        <div class="bg-darkBg px-4 py-2.5 border-t border-white/5 flex flex-wrap gap-2 text-[10px] font-mono">
+                            <button onclick="runCommand('whoami')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">whoami</button>
+                            <button onclick="runCommand('skills')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">skills</button>
+                            <button onclick="runCommand('projects')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">projects</button>
+                            <button onclick="runCommand('contact')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">contact</button>
+                            <button onclick="runCommand('leetcode')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">leetcode</button>
+                            <button onclick="runCommand('clear')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">clear</button>
+                        </div>
                     </div>
 
-                    <!-- Quick Command Buttons -->
-                    <div class="bg-darkBg px-4 py-2.5 border-t border-white/5 flex flex-wrap gap-2 text-[10px] font-mono">
-                        <button onclick="runCommand('whoami')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">whoami</button>
-                        <button onclick="runCommand('skills')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">skills</button>
-                        <button onclick="runCommand('projects')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">projects</button>
-                        <button onclick="runCommand('contact')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">contact</button>
-                        <button onclick="runCommand('leetcode')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">leetcode</button>
-                        <button onclick="runCommand('clear')" class="px-2.5 py-1 rounded bg-white/5 text-textMuted hover:text-accentBlue hover:bg-accentBlue/10 transition-colors border border-white/5">clear</button>
-                    </div>
                 </div>
             </div>
 
@@ -1792,6 +2009,321 @@
         window.runCommand = function(cmd) {
             executeTerminalCommand(cmd);
         };
+
+        // ----------------------------------------------------
+        // 6b. 3D Flip & Energy Beam Launch Controllers
+        // ----------------------------------------------------
+        let isTerminalFlipped = false;
+        let isAnimatingFlip = false;
+        let terminalIdleTimer = null;
+        const TERMINAL_IDLE_TIMEOUT_MS = 15000; // 15 seconds auto-flip
+
+        function resetTerminalIdleTimer() {
+            if (terminalIdleTimer) {
+                clearTimeout(terminalIdleTimer);
+                terminalIdleTimer = null;
+            }
+            if (isTerminalFlipped) {
+                terminalIdleTimer = setTimeout(() => {
+                    if (isTerminalFlipped && !isAnimatingFlip) {
+                        flipToPhoto();
+                    }
+                }, TERMINAL_IDLE_TIMEOUT_MS);
+            }
+        }
+
+        function clearTerminalIdleTimer() {
+            if (terminalIdleTimer) {
+                clearTimeout(terminalIdleTimer);
+                terminalIdleTimer = null;
+            }
+        }
+
+        function launchTerminalWithAnimation(callback) {
+            if (isTerminalFlipped) {
+                if (callback) callback();
+                return;
+            }
+            const btn = document.getElementById('hero-launch-terminal-btn');
+            const targetCard = document.getElementById('hero-flip-card');
+            if (!targetCard) return;
+
+            if (btn) {
+                animateEnergyBeam(btn, targetCard, () => {
+                    performFlipToTerminal();
+                    if (callback) callback();
+                });
+            } else {
+                performFlipToTerminal();
+                if (callback) callback();
+            }
+        }
+
+        function performFlipToTerminal() {
+            isTerminalFlipped = true;
+            const card = document.getElementById('hero-flip-card');
+            if (card) {
+                card.classList.add('is-flipped');
+            }
+            updateHeroButtonState(true);
+            playFlipSound();
+            resetTerminalIdleTimer();
+
+            setTimeout(() => {
+                const input = document.getElementById('terminal-input');
+                if (input) input.focus();
+            }, 720);
+        }
+
+        function flipToPhoto(e) {
+            if (e && e.stopPropagation) e.stopPropagation();
+            if (isAnimatingFlip) return;
+            clearTerminalIdleTimer();
+            isTerminalFlipped = false;
+            const card = document.getElementById('hero-flip-card');
+            if (card) {
+                card.classList.remove('is-flipped');
+            }
+            updateHeroButtonState(false);
+            playFlipSound();
+        }
+
+        // Reset idle timer on any user interaction with the terminal
+        const terminalFaceEl = document.getElementById('terminal-card-face');
+        if (terminalFaceEl) {
+            ['click', 'keydown', 'input', 'mousemove', 'scroll'].forEach(evt => {
+                terminalFaceEl.addEventListener(evt, resetTerminalIdleTimer, { passive: true });
+            });
+        }
+        if (terminalInput) {
+            terminalInput.addEventListener('input', resetTerminalIdleTimer);
+            terminalInput.addEventListener('keydown', resetTerminalIdleTimer);
+        }
+
+        function handlePhotoCardClick(e) {
+            // Prevent flip if clicking an interactive element inside photo face
+            if (e && (e.target.closest('button') || e.target.closest('a'))) return;
+            launchTerminalWithAnimation();
+        }
+
+        function handleHeroLaunchClick(e) {
+            if (e) e.preventDefault();
+            if (isAnimatingFlip) return;
+
+            if (!isTerminalFlipped) {
+                launchTerminalWithAnimation();
+            } else {
+                flipToPhoto();
+            }
+        }
+
+        function handleNavTerminalClick(e) {
+            if (!isTerminalFlipped) {
+                setTimeout(() => {
+                    launchTerminalWithAnimation();
+                }, 250);
+            }
+        }
+
+        function updateHeroButtonState(flipped) {
+            const textEl = document.getElementById('hero-launch-text');
+            const iconEl = document.getElementById('hero-launch-icon');
+            if (textEl && iconEl) {
+                if (flipped) {
+                    textEl.textContent = 'View Portrait';
+                    iconEl.className = 'fa-solid fa-id-badge text-accentBlue group-hover:scale-125 transition-transform';
+                    iconEl.textContent = '';
+                } else {
+                    textEl.textContent = 'Launch Terminal';
+                    iconEl.className = 'text-accentBlue group-hover:scale-125 transition-transform';
+                    iconEl.textContent = '>';
+                }
+            }
+        }
+
+        // Cinematic High-Energy Laser Beam & Photon Particle
+        function animateEnergyBeam(btnEl, targetCardEl, onImpact) {
+            if (isAnimatingFlip) return;
+            isAnimatingFlip = true;
+
+            btnEl.classList.add('btn-launching');
+            setTimeout(() => btnEl.classList.remove('btn-launching'), 550);
+
+            playTerminalLaunchSound();
+
+            const btnRect = btnEl.getBoundingClientRect();
+            const cardRect = targetCardEl.getBoundingClientRect();
+
+            const startX = btnRect.left + btnRect.width / 2;
+            const startY = btnRect.top + btnRect.height / 2;
+            const endX = cardRect.left + cardRect.width / 2;
+            const endY = cardRect.top + cardRect.height / 2;
+
+            const overlay = document.createElement('div');
+            overlay.id = 'energy-launch-overlay';
+            overlay.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:99999;overflow:hidden;';
+
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('style', 'position:absolute;width:100%;height:100%;top:0;left:0;');
+
+            const dx = endX - startX;
+            const dy = endY - startY;
+            const midX = (startX + endX) / 2;
+            const midY = (startY + endY) / 2 - (Math.abs(dx) > 100 ? 50 : 25);
+
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            defs.innerHTML = `
+                <linearGradient id="cyberBeamGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#66A3BF" stop-opacity="0.3"/>
+                    <stop offset="65%" stop-color="#66A3BF" stop-opacity="0.95"/>
+                    <stop offset="100%" stop-color="#FFFCE1" stop-opacity="1"/>
+                </linearGradient>
+                <filter id="beamLaserGlow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+                    <feMerge>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            `;
+            svg.appendChild(defs);
+
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            const d = `M ${startX} ${startY} Q ${midX} ${midY} ${endX} ${endY}`;
+            path.setAttribute('d', d);
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke', 'url(#cyberBeamGrad)');
+            path.setAttribute('stroke-width', '4');
+            path.setAttribute('stroke-linecap', 'round');
+            path.setAttribute('filter', 'url(#beamLaserGlow)');
+            svg.appendChild(path);
+            overlay.appendChild(svg);
+
+            // Glowing Photon Core
+            const projectile = document.createElement('div');
+            projectile.style.cssText = `
+                position: fixed;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: #FFFCE1;
+                box-shadow: 0 0 16px 5px #66A3BF, 0 0 35px 12px rgba(102, 163, 191, 0.8), 0 0 50px 20px rgba(255, 252, 225, 0.4);
+                transform: translate(-50%, -50%) scale(0.6);
+                left: ${startX}px;
+                top: ${startY}px;
+                z-index: 100000;
+                pointer-events: none;
+            `;
+            overlay.appendChild(projectile);
+            document.body.appendChild(overlay);
+
+            const pathLength = path.getTotalLength();
+            path.style.strokeDasharray = `${pathLength}`;
+            path.style.strokeDashoffset = `${pathLength}`;
+
+            const duration = 320; // 320ms exact timing
+            const startTime = performance.now();
+
+            function stepBeam(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const ease = progress < 0.5 
+                    ? 2 * progress * progress 
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+                const currentDist = ease * pathLength;
+                const pt = path.getPointAtLength(currentDist);
+                projectile.style.left = `${pt.x}px`;
+                projectile.style.top = `${pt.y}px`;
+                projectile.style.transform = `translate(-50%, -50%) scale(${1 + ease * 0.7})`;
+
+                path.style.strokeDashoffset = `${pathLength - currentDist}`;
+
+                if (progress < 1) {
+                    requestAnimationFrame(stepBeam);
+                } else {
+                    // Shockwave impact on target card
+                    createImpactShockwave(endX, endY);
+                    targetCardEl.classList.add('card-impact');
+                    setTimeout(() => targetCardEl.classList.remove('card-impact'), 800);
+
+                    if (onImpact) onImpact();
+
+                    path.style.transition = 'opacity 0.2s ease-out';
+                    projectile.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
+                    path.style.opacity = '0';
+                    projectile.style.opacity = '0';
+                    projectile.style.transform = 'translate(-50%, -50%) scale(2.2)';
+
+                    setTimeout(() => {
+                        overlay.remove();
+                        isAnimatingFlip = false;
+                    }, 250);
+                }
+            }
+
+            requestAnimationFrame(stepBeam);
+        }
+
+        function createImpactShockwave(x, y) {
+            const ring = document.createElement('div');
+            ring.style.cssText = `
+                position: fixed;
+                left: ${x}px;
+                top: ${y}px;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                border: 3px solid #FFFCE1;
+                box-shadow: 0 0 25px 8px #66A3BF, inset 0 0 20px 4px #66A3BF;
+                transform: translate(-50%, -50%) scale(1);
+                pointer-events: none;
+                z-index: 100000;
+                transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease-out;
+            `;
+            document.body.appendChild(ring);
+
+            requestAnimationFrame(() => {
+                ring.style.transform = 'translate(-50%, -50%) scale(16)';
+                ring.style.opacity = '0';
+            });
+
+            setTimeout(() => ring.remove(), 500);
+        }
+
+        function playFlipSound() {
+            if (!sfxEnabled || !audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(320, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(740, audioCtx.currentTime + 0.12);
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.15);
+            } catch(e) {}
+        }
+
+        function playTerminalLaunchSound() {
+            if (!sfxEnabled || !audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.32);
+                gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.35);
+            } catch(e) {}
+        }
 
         // ----------------------------------------------------
         // 7. Project Modal Details & Modal UX Listeners
